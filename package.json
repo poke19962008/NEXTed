@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "description": "Start up project to improve educational system",
   "main": "server.js",
-  "repository": "",
+  "repository": "https://github.com/poke19962008/EduFix.git",
+  license: "MIT",
   "author": "Sayan Das <poke19962008@gmail.com>",
   "dependencies": {
     "express": "~4.0.0",
