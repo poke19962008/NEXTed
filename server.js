@@ -24,7 +24,6 @@ var api = require("./routes/api/index.js");
 // Session/Cookie Middlewares
 app.use(express.static(__dirname + '/public'));
 app.use(cookieParser());
-app.use(cookieParser());
 app.use(session({        // Session configs
   secret: sessConfig.key,
   saveUninitialized: true,
@@ -38,7 +37,7 @@ app.use(session({        // Session configs
   store: new mongoStore({     // Mongo Store configs
     url: mongoConfig.uri,
     autoRemove: 'native', // Remove all the expired sessions
-    collection: 'session', // COllection name
+    collection: 'session', // Collection name
   }),
 }));
 
