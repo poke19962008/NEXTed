@@ -3,7 +3,7 @@ var express = require('express');
 
 var app = express();
 
-// Routes Declarationsnpm
+// Routes Declaration
 var api = require("./routes/api/index.js");
 
 // Middlewares
