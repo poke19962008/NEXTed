@@ -6,8 +6,8 @@ mongoose.connect(mongoConfig);
 var teacherSchema = require('../schema/teacher').teacher;
 var teacherDetailSchema = require('../schema/teacher').teacherDetail;
 
-teacherSchema = require('./methods').teacherMethods(teacherSchema);
-teacherDetailSchema = require('./methods').teacherDetailMethods(teacherDetailSchema);
+teacherSchema = require('./methods').teacherMethod(teacherSchema);
+teacherDetailSchema = require('./methods').teacherDetailMethod(teacherDetailSchema);
 
 var teacher = mongoose.model('teacher', teacherSchema);
 var teacherDetail = mongoose.model('teacherDetail', teacherDetailSchema);

@@ -1,10 +1,9 @@
-exports.teacherQuery = function(teacherSchema) {
-  
+exports.teacherMethod = function(teacherSchema) {
 
   return teacherSchema;
 };
 
-exports.teacherDetailQuery = function (teacherDetailSchema) {
+exports.teacherDetailMethod = function (teacherDetailSchema) {
 
 
   return teacherDetailSchema;

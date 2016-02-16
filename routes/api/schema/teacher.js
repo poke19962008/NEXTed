@@ -10,8 +10,8 @@ var teacher = new Schema({
       lName: String
   },
   classes: [{
-      class_: String 
-  }]
+      class_: String
+  }],
 });
 
 var teacherDetail = new Schema({
