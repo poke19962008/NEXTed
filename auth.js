@@ -1,5 +1,5 @@
 var crypto = require('crypto');
-var config = require('./config').load()['auth'];
+var config = require('./config').password;
 
 function encrypt(data) {
   var sha = crypto.createHash(config.algorithm);

@@ -12,6 +12,7 @@ var teacher = new Schema({
   classes: [{
       class_: String
   }],
+  password: String
 });
 
 var teacherDetail = new Schema({
@@ -27,7 +28,7 @@ var teacherDetail = new Schema({
         course: String,
         institute: String
     },
-    skill: [{
+    skills: [{
         skill: String,
         endorser: [{
             name: String,
@@ -45,7 +46,6 @@ var teacherDetail = new Schema({
             year: Number
         }
     }],
-    password: String
 });
 
 exports.teacher = teacher;
