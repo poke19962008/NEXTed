@@ -4,9 +4,31 @@ var TeacherDetail = require('./model').teacherDetail;
 var express = require('express');
 var router = express.Router();
 
-router.get('/', function (req, res){
-    res.send("Teacher's API")
+
+// Teacher Router middleware checks if IDType is valid
+router.use(function (req, res, next){
+  var type = req.session.IDType;
+
+  if(type != 'teacher' && type != undefined ) res.send({ 'isValidUser': false });
+  else next();
 });
+
+
+// Checks if person is logged in.
+function isLoggedIn (req, res, next){
+  var type = req.session.IDType;
+  var ID = req.session.ID;
+
+  if(type != "teacher") res.send({ 'isValidUser': false });
+  else if(type == undefined && ID == undefined) res.send({ 'sessionExpired': true });
+  else next();
+};
+
+
+router.get('/', function (req, res){
+  res.send('Teacher\'s API Module');
+});
+
 
 /**
 ** LOGIN
@@ -16,7 +38,9 @@ router.get('/', function (req, res){
 ** Verification Failure -> { status: success }
 ** Internal Server Error -> { status: ise }
 **/
-router.get('/login', function (req, res){
+router.get('/login', function (req, res, next){
+  console.log('in /login');
+
   var password = req.query.password;
   var ID = req.query.ID;
 
@@ -28,23 +52,63 @@ router.get('/login', function (req, res){
   });
 
   teacher.verifyTeacher(function(err, doc){
-    if(doc.length == 0) res.send( { 'status': 'failed' });
+    if(doc.length == 0) res.send({ 'status': 'failed' });
     else if(doc.length == 1) {
       req.session.IDType = "teacher";
       req.session.ID = ID;
 
-      res.send( { 'status': 'success' });
+      res.send({ 'status': 'success' });
     }
-    else res.send( { 'status': 'ise' });
+    else res.send({ 'status': 'ise' });
   });
+
+});
+
+
+router.get('/update', isLogedIn, function (req, res){
+
+});
+
+
+router.get('/addSkill', isLoggedIn, function(req, res){
+
+});
+
+
+router.get('/endorse', isLoggedIn, function (req, res){
+
+});
+
+
+router.get('/changePasword', isLoggedIn, function (req, res){
+
+});
+
+
+router.get('/updateClasses', isLoggedIn, function (req, res){
 
 });
 
 /**
 **  Testing purpose only.
 **/
-router.get('/test', function (req, res){
-  res.send(req.session);
-});
+// router.get('/test', function (req, res){
+//   var teacher = new Teacher({
+//     teacherID: '123test',
+//     name: {
+//       fName: 'Sayan',
+//       mNae: 'Kr.',
+//       lName: 'Das'
+//     },
+//     classes: [{
+//       class_: 'X'
+//     }],
+//     password: '123test'
+//   });
+//
+//   teacher.save();
+//
+//   res.send(req.session);
+// });
 
 module.exports = router;
