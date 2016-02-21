@@ -15,7 +15,7 @@ router.use(function (req, res, next){
 
 
 // Checks if person is logged in.
-function isLoggedIn (req, res, next){
+function isLogedIn (req, res, next){
   var type = req.session.IDType;
   var ID = req.session.ID;
 
@@ -34,7 +34,7 @@ router.get('/', function (req, res){
 ** LOGIN
 ** Parameters -> teacherID & password
 ** RESPONSE
-** Succes -> { status: success }
+** Success -> { status: success }
 ** Verification Failure -> { status: success }
 ** Internal Server Error -> { status: ise }
 **/
@@ -70,22 +70,22 @@ router.get('/update', isLogedIn, function (req, res){
 });
 
 
-router.get('/addSkill', isLoggedIn, function(req, res){
+router.get('/addSkill', isLogedIn, function(req, res){
 
 });
 
 
-router.get('/endorse', isLoggedIn, function (req, res){
+router.get('/endorse', isLogedIn, function (req, res){
 
 });
 
 
-router.get('/changePasword', isLoggedIn, function (req, res){
+router.get('/changePasword', isLogedIn, function (req, res){
 
 });
 
 
-router.get('/updateClasses', isLoggedIn, function (req, res){
+router.get('/updateClasses', isLogedIn, function (req, res){
 
 });
 

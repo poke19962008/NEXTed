@@ -1,0 +1,16 @@
+{
+  "teacher": [
+    "programming",
+    "c++",
+    "c",
+    "java"
+  ],
+
+  "student": [
+    "programming",
+    "c++",
+    "c",
+    "java"
+  ]
+
+}

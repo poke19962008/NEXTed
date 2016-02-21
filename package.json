@@ -12,6 +12,7 @@
     "express": "~4.0.0",
     "express-session": "^1.13.0",
     "mongodb": "^2.1.7",
-    "mongoose": "^4.4.3"
+    "mongoose": "^4.4.3",
+    "underscore": "^1.8.3"
   }
 }

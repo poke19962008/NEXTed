@@ -3,6 +3,7 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var teacher = new Schema({
+  schoolID: String,
   teacherID: String,
   name: {
       fName: String,
@@ -17,6 +18,7 @@ var teacher = new Schema({
 
 var teacherDetail = new Schema({
     teacherID: String,
+    schoolID: String,
     designation: String,
     subject: [{
         subjectCode: String,
