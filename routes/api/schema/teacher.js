@@ -33,8 +33,12 @@ var teacherDetail = new Schema({
     skills: [{
         skill: String,
         endorser: [{
-            name: String,
-            timeStamp: String,
+            name: {
+                fName: String,
+                mName: String,
+                lName: String
+            },
+            timeStamp: Number,
             teacherID: String,
             schoolID: String,
         }]
