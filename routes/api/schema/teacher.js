@@ -30,6 +30,15 @@ var teacherDetail = new Schema({
         course: String,
         institute: String
     },
+    experience: [{
+      title: String,
+      date: {
+        date: Number,
+        month: Number,
+        year: Number,
+      },
+      description: String
+    }],
     skills: [{
         skill: String,
         endorser: [{
