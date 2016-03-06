@@ -1,3 +1,14 @@
+/**
+** Teacher API: index.js
+** Author: SAYAN DAS
+**/
+
+/**
+  Session:
+  IDType => 'teacher'
+  ID => teacherID
+*/
+
 var Teacher = require('./model').teacher;
 var TeacherDetail = require('./model').teacherDetail;
 
@@ -65,15 +76,45 @@ router.get('/login', function (req, res, next){
 });
 
 
-router.get('/update', isLogedIn, function (req, res){
 
+/**
+** ADD SKILL
+** TODO: Verify With In Built Skill data sets
+** RESPONSE
+** Success -> { status: success }
+** Parameters Missing -> { status: params missing }
+** Internal Server Error -> { status: ise }
+**/
+router.post('/addSkill', isLogedIn, function (req, res){
+  var skill = req.body.skill;
+
+  var teacherD = new TeacherDetail({
+    'teacherID': req.session.ID
+  });
+
+  teacherD.getSkills(function (err, doc){
+    var skills = doc.skills;
+    var found = false;
+
+    if(skill == undefined || skill == "") {
+      res.send({'status': 'params missing'});
+      res.end();
+    }
+
+    for (var i = 0; i < skills.length; i++) {
+      if(skills[i].skill == skill) found = true;
+    }
+
+    if(found) res.send({'status': 'skill exist'});
+    else{
+      teacherD.addSkill(skill , function(err, doc){
+        if(err) res.send({'status': 'ise'});
+        else res.send({'status': 'success'});
+      });
+    }
+  });
 });
 
-
-
-router.get('/addSkill', isLogedIn, function(req, res){
-
-});
 
 
 /**
@@ -100,9 +141,9 @@ router.get('/endorse', isLogedIn, function (req, res){
       'teacherID': endorserID
     });
 
-      teacher.getDetails(function (err, endorser){
-        console.log(endorser);
-        teacherDetail.endorse(endorser, skill, function (err, doc){
+    teacher.getDetails(function (err, endorser){
+      console.log(endorser);
+      teacherDetail.endorse(endorser, skill, function (err, doc){
         console.log(doc);
         if(err) res.send({ status: 'ise' });
         else res.send({ status: 'success' });
@@ -122,27 +163,17 @@ router.get('/updateClasses', isLogedIn, function (req, res){
 
 });
 
+
 /**
-**  Testing purpose only.
+** CREATE DUMMY USERS
+** Testing Purpose Only
 **/
-router.get('/test', function (req, res){
-  // {
-  //   teacherID: '123test',
-  //   skills: [{
-  //       skill: "C++",
-  //       endorser: [{
-  //           name: "foo",
-  //           timeStamp: "123",
-  //           teacherID: "123ttt",
-  //           schoolID: "123fff",
-  //       }]
-  //   }]
-  // });
+router.get('/createDummyUser', function (req, res){
   var teacher = new Teacher({
-    teacherID: '123test',
-    schoolID: '123School',
+    teacherID: '123testID',
+    schoolID: '123SchoolID',
     name: {
-      fName: 'sensei',
+      fName: 'Sayn',
       mNae: 'Kr.',
       lName: 'Das'
     },
@@ -152,11 +183,46 @@ router.get('/test', function (req, res){
     password: '123test',
   });
 
+  var teacherDetail =new TeacherDetail({
+     teacherID: '123testID',
+     schoolID: '123SchoolID'
+  });
+
+
+  teacherDetail.save(function (err){
+    if(err) console.log(err);
+  });
   teacher.save(function(err){
     if(err) console.log(err);
   });
 
-  res.send(req.session);
+  res.send('Added Successfully');
 });
+
+/**
+**  Testing purpose only.
+**/
+// router.get('/test', function (req, res){
+//
+//   var teacher = new Teacher({
+//     teacherID: '123test',
+//     schoolID: '123School',
+//     name: {
+//       fName: 'sensei',
+//       mNae: 'Kr.',
+//       lName: 'Das'
+//     },
+//     classes: [{
+//       class_: 'X'
+//     }],
+//     password: '123test',
+//   });
+//
+//   teacher.save(function(err){
+//     if(err) console.log(err);
+//   });
+//
+//   res.send(req.session);
+// });
 
 module.exports = router;

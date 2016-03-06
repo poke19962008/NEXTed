@@ -1,7 +1,10 @@
 exports.teacherMethod = function(teacherSchema) {
 
+  /**
+  ** Verify Teacher
+  ** Matches for `teacherID` and `password`
+  **/
   teacherSchema.methods.verifyTeacher = function(cb){
-
     return this.model('teacher').find({
       'teacherID': this.teacherID,
       'password': this.password
@@ -9,8 +12,13 @@ exports.teacherMethod = function(teacherSchema) {
     'teacherID', cb);
   };
 
-  teacherSchema.methods.getDetails = function (cb){
 
+  /**
+  ** Get Details
+  ** Returns `name`, `teacherID` and  `schoolID`
+  ** from `teachers` collection
+  **/
+  teacherSchema.methods.getDetails = function (cb){
     return this.model('teacher').findOne({
       'teacherID': this.teacherID
     },
@@ -22,6 +30,11 @@ exports.teacherMethod = function(teacherSchema) {
 };
 
 exports.teacherDetailMethod = function (teacherDetailSchema) {
+
+  /**
+  ** Endorse
+  ** TODO: Prevent Multiple from on User
+  **/
   teacherDetailSchema.methods.endorse = function(endorser, skill, cb){
     var timeStamp = Math.floor(Date.now() / 1000);
     var endorseeID = this.teacherID;
@@ -39,7 +52,33 @@ exports.teacherDetailMethod = function (teacherDetailSchema) {
           }
         }
       }, cb);
+  };
 
+  /**
+  ** Get Skill
+  **/
+  teacherDetailSchema.methods.getSkills = function(cb){
+    return this.model('teacherDetail').findOne({
+      'teacherID': this.teacherID
+    },
+    'skills', cb);
+  };
+
+  /**
+  ** Add Skill
+  ** Adds skills to the user
+  **/
+  teacherDetailSchema.methods.addSkill = function(skillName, cb){
+    return this.model('teacherDetail').update({
+      'teacherID': this.teacherID
+    },{
+      $push: {
+        'skills': {
+          'skill': skillName,
+          'endorser': []
+        }
+      }
+    }, cb);
   };
 
   return teacherDetailSchema;
