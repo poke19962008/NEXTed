@@ -15,6 +15,7 @@ var session = require('express-session');
 var mongoStore = require('connect-mongo')(session);
 var sessConfig = require('./config').session;
 var mongoConfig = require('./config').mongo;
+var bodyParser = require('body-parser');
 
 var app = express();
 
@@ -24,6 +25,8 @@ var api = require("./routes/api/index.js");
 // Session/Cookie Middlewares
 app.use(express.static(__dirname + '/public'));
 app.use(cookieParser());
+app.use(bodyParser.json());  // JSON encoded body parser
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({        // Session configs
   secret: sessConfig.key,
   saveUninitialized: true,
