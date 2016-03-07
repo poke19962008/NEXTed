@@ -41,6 +41,7 @@ var teacherDetail = new Schema({
     }],
     skills: [{
         skill: String,
+        counter: 0,
         endorser: [{
             name: {
                 fName: String,

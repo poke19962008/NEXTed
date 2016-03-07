@@ -38,20 +38,62 @@ exports.teacherDetailMethod = function (teacherDetailSchema) {
   teacherDetailSchema.methods.endorse = function(endorser, skill, cb){
     var timeStamp = Math.floor(Date.now() / 1000);
     var endorseeID = this.teacherID;
+    var model = this.model('teacherDetail');
 
-    this.model('teacherDetail').update({
-        'teacherID': endorseeID,
-        'skills.skill': skill
-      },{
-        $push: {
-          'skills.$.endorser': {
-            name: endorser.name,
-            timeStamp: timeStamp,
-            teacherID: endorser.teacherID,
-            schoolID: "schoolID"
+    this.model('teacherDetail').findOne({
+      'teacherID': endorseeID,
+      'skills': {
+        $elemMatch: {
+          'skill': skill,
+          'endorser': {
+            $elemMatch: {
+              'teacherID': '123testID'
+            }
           }
         }
-      }, cb);
+      }
+    }, function (err, doc){
+      if(doc == null)
+        model.update({
+            'teacherID': endorseeID,
+            'skills.skill': skill
+          },{
+            $push: {
+              'skills.$.endorser': {
+                name: endorser.name,
+                timeStamp: timeStamp,
+                teacherID: endorser.teacherID,
+                schoolID: "schoolID"
+              }
+            },
+            $inc: {
+              'skills.$.counter': 1
+            }
+          }, cb);
+        else cb("already endorsed", "");
+    });
+};
+
+
+  /**
+  ** Remove Endorsement
+  **/
+  teacherDetailSchema.methods.removeEndorse = function(endorser, skill, cb){
+    var endorseeID = this.teacherID;
+
+    this.model('teacherDetail').update({
+      'teacherID': endorseeID,
+      'skills.skill': skill
+    }, {
+      $pull : {
+        'skills.$.endorser': {
+          teacherID: endorser.teacherID
+        }
+      },
+      $inc: {
+        'skills.$.counter': -1
+      }
+    }, cb);
   };
 
   /**

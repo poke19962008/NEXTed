@@ -119,37 +119,47 @@ router.post('/addSkill', isLogedIn, function (req, res){
 
 /**
 ** ENDORSE
-** Parameters -> endorserID, skill
+** Parameters -> endorseeID, skill
+** Route ->
 ** RESPONSE
+** Invalid Routing -> { status: inv routing }
 ** Success -> { status: success }
 ** Permission Denied -> { status: permissionDenied }
 ** Internal Server Error -> { status: ise }
 ** TODO: Skill regex Verification
 **       Check multiple endorsement from one user
 **/
-router.get('/endorse', isLogedIn, function (req, res){
+router.get('/endorse/:type', isLogedIn, function (req, res){
+  var type = req.params.type;
   var endorseeID = req.session.ID;
-  var idType = req.session.IDType;
   var endorserID = req.query.endorseeID;
   var skill = req.query.skill;
 
-  if(idType == "teacher"){
-    var teacherDetail = new TeacherDetail({
-      'teacherID': endorseeID
-    });
-    var teacher = new Teacher({
-      'teacherID': endorserID
-    });
+  var teacherDetail = new TeacherDetail({
+    'teacherID': endorseeID
+  });
+  var teacher = new Teacher({
+    'teacherID': endorserID
+  });
 
-    teacher.getDetails(function (err, endorser){
-      console.log(endorser);
+  teacher.getDetails(function (err, endorser){
+    if(type == "add"){
       teacherDetail.endorse(endorser, skill, function (err, doc){
-        console.log(doc);
-        if(err) res.send({ status: 'ise' });
+        if(err == 'already endorsed') res.send({ status: err });
+        else if(err) res.send({ status: 'ise'});
+        else if(doc == 'already endorsed')
+          res.send({status: 'already endorsed'});
         else res.send({ status: 'success' });
       });
-    });
-  }else res.send({ status: 'permissionDenied'});
+    }else if(type == "remove"){
+      teacherDetail.removeEndorse(endorser, skill, function (err, doc){
+        if(err) res.send({status: 'ise'});
+        else res.send({status: 'success'});
+      });
+    }else{
+      res.send({'status': 'inv routing'});
+    }
+  });
 
 });
 
@@ -202,27 +212,8 @@ router.get('/createDummyUser', function (req, res){
 /**
 **  Testing purpose only.
 **/
-// router.get('/test', function (req, res){
-//
-//   var teacher = new Teacher({
-//     teacherID: '123test',
-//     schoolID: '123School',
-//     name: {
-//       fName: 'sensei',
-//       mNae: 'Kr.',
-//       lName: 'Das'
-//     },
-//     classes: [{
-//       class_: 'X'
-//     }],
-//     password: '123test',
-//   });
-//
-//   teacher.save(function(err){
-//     if(err) console.log(err);
-//   });
-//
-//   res.send(req.session);
-// });
+router.get('/test/:id', function (req, res){
+  res.send(req.params.id);
+});
 
 module.exports = router;
