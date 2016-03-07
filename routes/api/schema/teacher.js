@@ -20,7 +20,7 @@ var teacherDetail = new Schema({
     teacherID: String,
     schoolID: String,
     designation: String,
-    subject: [{
+    subjects: [{
         subjectCode: String,
         subName: String
     }],

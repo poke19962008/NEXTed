@@ -3,18 +3,23 @@
 ** Author: SAYAN DAS
 **/
 
-/**
-  Session:
-  IDType => 'teacher'
-  ID => teacherID
-*/
-
 var Teacher = require('./model').teacher;
 var TeacherDetail = require('./model').teacherDetail;
+
+var updateRouter = require('./update');
 
 var express = require('express');
 var router = express.Router();
 
+
+/**
+  Session Details:
+    IDType => 'teacher'
+    ID => teacherID
+
+  Cookies:
+   None
+*/
 
 // Teacher Router middleware checks if IDType is valid
 router.use(function (req, res, next){
@@ -30,8 +35,7 @@ function isLogedIn (req, res, next){
   var type = req.session.IDType;
   var ID = req.session.ID;
 
-  if(type != "teacher") res.send({ 'isValidUser': false });
-  else if(type == undefined && ID == undefined) res.send({ 'sessionExpired': true });
+  if(type == undefined && ID == undefined) res.send({ 'sessionExpired': true });
   else next();
 };
 
@@ -50,7 +54,6 @@ router.get('/', function (req, res){
 ** Internal Server Error -> { status: ise }
 **/
 router.get('/login', function (req, res, next){
-  console.log('in /login');
 
   var password = req.query.password;
   var ID = req.query.ID;
@@ -164,14 +167,10 @@ router.get('/endorse/:type', isLogedIn, function (req, res){
 });
 
 
-router.get('/changePasword', isLogedIn, function (req, res){
-
-});
-
-
-router.get('/updateClasses', isLogedIn, function (req, res){
-
-});
+/**
+** UPDATE
+**/
+router.use('/update', updateRouter);
 
 
 /**
