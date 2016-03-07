@@ -132,8 +132,7 @@ router.post('/addSkill', isLogedIn, function (req, res){
 ** TODO: Skill regex Verification
 **       Check multiple endorsement from one user
 **/
-router.get('/endorse/:type', isLogedIn, function (req, res){
-  var type = req.params.type;
+router.get('/endorse/', isLogedIn, function (req, res){
   var endorseeID = req.session.ID;
   var endorserID = req.query.endorseeID;
   var skill = req.query.skill;
@@ -146,7 +145,6 @@ router.get('/endorse/:type', isLogedIn, function (req, res){
   });
 
   teacher.getDetails(function (err, endorser){
-    if(type == "add"){
       teacherDetail.endorse(endorser, skill, function (err, doc){
         if(err == 'already endorsed') res.send({ status: err });
         else if(err) res.send({ status: 'ise'});
@@ -154,14 +152,6 @@ router.get('/endorse/:type', isLogedIn, function (req, res){
           res.send({status: 'already endorsed'});
         else res.send({ status: 'success' });
       });
-    }else if(type == "remove"){
-      teacherDetail.removeEndorse(endorser, skill, function (err, doc){
-        if(err) res.send({status: 'ise'});
-        else res.send({status: 'success'});
-      });
-    }else{
-      res.send({'status': 'inv routing'});
-    }
   });
 
 });

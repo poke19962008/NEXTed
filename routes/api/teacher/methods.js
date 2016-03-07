@@ -70,31 +70,23 @@ exports.teacherDetailMethod = function (teacherDetailSchema) {
               'skills.$.counter': 1
             }
           }, cb);
-        else cb("already endorsed", "");
+        else
+          model.update({
+            'teacherID': endorseeID,
+            'skills.skill': skill
+          }, {
+            $pull : {
+              'skills.$.endorser': {
+                teacherID: endorser.teacherID
+              }
+            },
+            $inc: {
+              'skills.$.counter': -1
+            }
+          }, cb);
     });
 };
 
-
-  /**
-  ** Remove Endorsement
-  **/
-  teacherDetailSchema.methods.removeEndorse = function(endorser, skill, cb){
-    var endorseeID = this.teacherID;
-
-    this.model('teacherDetail').update({
-      'teacherID': endorseeID,
-      'skills.skill': skill
-    }, {
-      $pull : {
-        'skills.$.endorser': {
-          teacherID: endorser.teacherID
-        }
-      },
-      $inc: {
-        'skills.$.counter': -1
-      }
-    }, cb);
-  };
 
   /**
   ** Get Skill
