@@ -25,6 +25,14 @@ exports.teacherMethod = function(teacherSchema) {
     'name teacherID schoolID', cb);
   };
 
+  /**
+  ** Limited Search
+  **/
+  teacherSchema.methods.limitedSearch = function (cb){
+    this.model('teacher').find({},
+      'name schoolName', cb);
+  };
+
 
   return teacherSchema;
 };

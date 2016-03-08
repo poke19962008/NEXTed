@@ -5,6 +5,7 @@ var Schema = mongoose.Schema;
 var teacher = new Schema({
   schoolID: String,
   teacherID: String,
+  schoolName: String,
   name: {
       fName: String,
       mName: String,
