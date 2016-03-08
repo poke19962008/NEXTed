@@ -174,5 +174,18 @@ exports.teacherDetailMethod = function (teacherDetailSchema) {
 
   };
 
+  /**
+  ** Update Email
+  **/
+  teacherDetailSchema.methods.updateEmail = function(cb){
+    this.model('teacherDetail').update({
+      'teacherID': this.teacherID
+    }, {
+      $set: {
+        'email': this.email
+      }
+    }, cb);
+  };
+
   return teacherDetailSchema;
 };

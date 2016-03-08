@@ -29,7 +29,7 @@ router.get('/', isLoggedIn, function(req, res){
 /**
 ** SUBJECT UPDATE (POST)
 ** PARAMETERS -> add, remove
-** BODY -> {
+** BODY(application/json) -> {
     subjects: [{
       subjectCode: String,
       subName: String
@@ -89,12 +89,34 @@ router.post('/:id/subjects', isLoggedIn, function (req, res){
 
 });
 
+
+/**
+** UPDATE EMAIL (POST)
+** TODO: Regex Verification of Email
+** BODY(application/json) ->
+** { email: String }
+** RESPONSE
+** Success -> { status: success }
+** Internal Server Error -> { status: ise }
+**/
 router.post('/email', isLoggedIn, function (req, res){
   var teacherID  = req.session.ID;
-  var data = req.body;
-  var verified = false;
+  var body = req.body;
+  var verified = true;
 
   // Body Verification
+  if(body.email == undefined) verified = false;
+
+  // Update Process
+  var teacherDetail = new TeacherDetail({
+    'teacherID': teacherID,
+    'email': body.email
+  });
+
+  teacherDetail.updateEmail(function(err, doc){
+    if(err) res.send({ status: 'ise' });
+    else res.send({ status: 'success' });
+  });
 });
 
 router.post('/qualification', isLoggedIn, function (req, res){
