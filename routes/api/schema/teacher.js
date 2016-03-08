@@ -25,11 +25,11 @@ var teacherDetail = new Schema({
         subName: String
     }],
     email: String,
-    qualification: {
+    qualification: [{
         degree: String,
         course: String,
         institute: String
-    },
+    }],
     experience: [{
       title: String,
       date: {
