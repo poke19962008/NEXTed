@@ -46,8 +46,8 @@ router.get('/', function (req, res){
 
 
 /**
-** LOGIN
-** Parameters -> teacherID & password
+** LOGIN (GET)
+** Query -> teacherID & password
 ** RESPONSE
 ** Success -> { status: success }
 ** Verification Failure -> { status: failed }
@@ -81,8 +81,11 @@ router.get('/login', function (req, res, next){
 
 
 /**
-** ADD SKILL
+** ADD SKILL (POST)
 ** TODO: Verify With In Built Skill data sets
+** BODY -> {
+  skill: String
+}
 ** RESPONSE
 ** Success -> { status: success }
 ** Parameters Missing -> { status: params missing }
@@ -121,9 +124,8 @@ router.post('/addSkill', isLogedIn, function (req, res){
 
 
 /**
-** ENDORSE
-** Parameters -> endorseeID, skill
-** Route ->
+** ENDORSE (GET)
+** QUERY -> endorseeID, skill
 ** RESPONSE
 ** Invalid Routing -> { status: inv routing }
 ** Success -> { status: success }
@@ -132,7 +134,7 @@ router.post('/addSkill', isLogedIn, function (req, res){
 ** TODO: Skill regex Verification
 **       Check multiple endorsement from one user
 **/
-router.get('/endorse/', isLogedIn, function (req, res){
+router.get('/endorse', isLogedIn, function (req, res){
   var endorseeID = req.session.ID;
   var endorserID = req.query.endorseeID;
   var skill = req.query.skill;
@@ -164,7 +166,7 @@ router.use('/update', updateRouter);
 
 
 /**
-** CREATE DUMMY USERS
+** CREATE DUMMY USERS (GET)
 ** Testing Purpose Only
 **/
 router.get('/createDummyUser', function (req, res){

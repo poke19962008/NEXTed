@@ -55,7 +55,7 @@ exports.teacherDetailMethod = function (teacherDetailSchema) {
           'skill': skill,
           'endorser': {
             $elemMatch: {
-              'teacherID': '123testID'
+              'teacherID': endorser.teacherID
             }
           }
         }
@@ -121,6 +121,57 @@ exports.teacherDetailMethod = function (teacherDetailSchema) {
         }
       }
     }, cb);
+  };
+
+
+  // All the UPDATE methods
+
+  /**
+  **  Subject Update Module
+  ** 1) addSubject() 2) removeSubject()
+  **/
+  teacherDetailSchema.methods.addSubject = function(subject, cb){
+    var model = this.model('teacherDetail');
+    var teacherID = this.teacherID;
+
+    this.model('teacherDetail').count({
+      'teacherID': teacherID,
+      'subjects.subName': subject.subName,
+      'subjects.subjectCode': subject.subjectCode
+    }, function (err, count){
+      if(count == 0)
+        model.update({
+            'teacherID': teacherID
+          }, {
+            $push: {
+                'subjects' : subject
+              }
+        }, cb);
+      else cb("already exist", "");
+    });
+
+  };
+
+  teacherDetailSchema.methods.removeSubjects = function(subjects, cb){
+    var model = this.model('teacherDetail');
+    var teacherID = this.teacherID;
+
+    model.find({
+      'teacherID': teacherID,
+      'subjects.subName': subject.subName,
+      'subjects.subjectCode': subject.subjectCode
+    }, function(err, count){
+      if(count != 0)
+        model.update({
+            'teacherID': teacherID
+          }, {
+            $pull: {
+                'subjects' : subjects
+              }
+        }, cb);
+      else cb("does not exist", "");
+    });
+
   };
 
   return teacherDetailSchema;
