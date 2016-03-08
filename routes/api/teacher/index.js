@@ -98,18 +98,15 @@ router.post('/addSkill', isLogedIn, function (req, res){
     'teacherID': req.session.ID
   });
 
-  teacherD.getSkills(function (err, doc){
-    var skills = doc.skills;
+  if(skill == undefined || skill == "") {
+    res.send({'status': 'params missing'});
+    res.end();
+  }
+
+  teacherD.countSkills(skill, function (err, count){
     var found = false;
 
-    if(skill == undefined || skill == "") {
-      res.send({'status': 'params missing'});
-      res.end();
-    }
-
-    for (var i = 0; i < skills.length; i++) {
-      if(skills[i].skill == skill) found = true;
-    }
+    if(count != 0) found = true;
 
     if(found) res.send({'status': 'skill exist'});
     else{

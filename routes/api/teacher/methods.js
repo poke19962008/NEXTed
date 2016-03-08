@@ -97,13 +97,13 @@ exports.teacherDetailMethod = function (teacherDetailSchema) {
 
 
   /**
-  ** Get Skill
+  ** Count Skills
   **/
-  teacherDetailSchema.methods.getSkills = function(cb){
-    return this.model('teacherDetail').findOne({
-      'teacherID': this.teacherID
-    },
-    'skills', cb);
+  teacherDetailSchema.methods.countSkills = function(skill, cb){
+    return this.model('teacherDetail').count({
+      'teacherID': this.teacherID,
+      'skills.skill': skill
+    }, cb);
   };
 
   /**
