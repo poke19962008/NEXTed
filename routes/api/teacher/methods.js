@@ -279,13 +279,64 @@ exports.teacherDetailMethod = function (teacherDetailSchema) {
         }
       }
     }, function(err, count){
-      console.log(count);
       if(count != 0){
         model.update({
           'teacherID': teacherID,
         }, {
           $pull: {
             'experience': exp
+          }
+        }, cb);
+      }else cb("not found", "");
+    });
+  };
+
+  /**
+  ** Update Award
+  ** 1) addAward 2) removeAward
+  **/
+  teacherDetailSchema.methods.addAward = function(award, cb){
+    var model = this.model('teacherDetail');
+    var teacherID = this.teacherID;
+
+    model.count({
+      'teacherID': this.teacherID,
+      'award': {
+        $elemMatch: {
+          'title': award.title
+        }
+      }
+    }, function(err, count){
+      if(count == 0){
+        model.update({
+          'teacherID': teacherID,
+        }, {
+          $push: {
+            'award': award
+          }
+        }, cb);
+      }else cb("already exist", "");
+    });
+  };
+
+  teacherDetailSchema.methods.removeAward =  function(award, cb){
+    var model = this.model('teacherDetail');
+    var teacherID = this.teacherID;
+
+    model.count({
+      'teacherID': this.teacherID,
+      'award': {
+        $elemMatch: {
+          'title': award.title
+        }
+      }
+    }, function(err, count){
+      if(count != 0){
+        model.update({
+          'teacherID': teacherID,
+        }, {
+          $pull: {
+            'award': award
           }
         }, cb);
       }else cb("not found", "");

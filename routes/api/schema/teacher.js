@@ -33,12 +33,12 @@ var teacherDetail = new Schema({
     }],
     experience: [{
       title: String,
+      description: String,
       date: {
         date: Number,
         month: Number,
         year: Number,
-      },
-      description: String
+      }
     }],
     skills: [{
         skill: String,
