@@ -237,7 +237,60 @@ exports.teacherDetailMethod = function (teacherDetailSchema) {
         }, cb);
       }else cb("not found", "");
     });
-  }
+  };
+
+  /**
+  ** Update Experience
+  ** 1) addExp 2) removeExp
+  **/
+  teacherDetailSchema.methods.addExp = function(exp, cb){
+    var model = this.model('teacherDetail');
+    var teacherID = this.teacherID;
+
+    model.count({
+      'teacherID': this.teacherID,
+      'experience': {
+        $elemMatch: {
+          'title': exp.title
+        }
+      }
+    }, function(err, count){
+      if(count == 0){
+        model.update({
+          'teacherID': teacherID,
+        }, {
+          $push: {
+            'experience': exp
+          }
+        }, cb);
+      }else cb("already exist", "");
+    });
+  };
+
+  teacherDetailSchema.methods.removeExp =  function(exp, cb){
+    var model = this.model('teacherDetail');
+    var teacherID = this.teacherID;
+
+    model.count({
+      'teacherID': this.teacherID,
+      'experience': {
+        $elemMatch: {
+          'title': exp.title
+        }
+      }
+    }, function(err, count){
+      console.log(count);
+      if(count != 0){
+        model.update({
+          'teacherID': teacherID,
+        }, {
+          $pull: {
+            'experience': exp
+          }
+        }, cb);
+      }else cb("not found", "");
+    });
+  };
 
   return teacherDetailSchema;
 };

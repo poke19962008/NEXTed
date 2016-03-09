@@ -180,16 +180,83 @@ router.post('/:id/qualification', isLoggedIn, function (req, res){
   else if(opr == "remove")
     for(var i=0; i<qualfs.length; i++)
       teacherDetail.removeQualf(qualfs[i], function(err, doc){
-        if(err) res.send({ status: 'ise' });
-        else if(err == "not found") res.send({ status: err });
+        if(err == "not found") res.send({ status: err });
+        else if(err) res.send({ status: 'ise' });
         else res.send({ status: 'success' });
       });
   else res.send({ status: 'inv. routing' });
 
 });
 
-router.post('/experience', isLoggedIn, function (req, res){
 
+/**
+** UPDATE EXPERIENCE (POST)
+** PARAMETERS -> 1) add 2) remove
+** BODY(application/json) ->{experience: [
+  title: String,
+  description: String,
+  date: {
+    date: Number,
+    month: Number,
+    year: Number
+  }
+]}
+** RESPONSE
+** Success -> { status: success }
+** Internal Server Error -> { status: ise }
+** Invalid Body Format -> { status: inv. format }
+** Invalid Routing -> { status: inv. routing }
+** Qualf Already Exist -> { status: already exist }
+** Qualf Not Found -> { status: not found }
+**/
+router.post('/:id/experience', isLoggedIn, function (req, res){
+  var opr = req.params.id;
+  var data = req.body;
+  var teacherID = req.session.ID;
+  var verified = true;
+
+  // Body Verification
+  if(data.experience == undefined) verified = false;
+  else {
+    if(data.experience.length == 0) verified = false;
+    else for (var i = 0; i < data.experience.length; i++) {
+      if(data.experience[i].date != undefined){
+        if(data.experience[i].title == undefined ||
+           data.experience[i].description == undefined ||
+           data.experience[i].date.date == undefined ||
+           data.experience[i].date.month == undefined ||
+           data.experience[i].date.year == undefined)
+          {verified = false; break;}
+      } else {verified = false; break;}
+    }
+  }
+
+  // Update Process
+  if(!verified){
+    res.send({ status: 'inv. format' });
+    res.end();
+  }
+
+  var teacherDetail = new TeacherDetail({
+    'teacherID': teacherID
+  });
+  var exps = data.experience;
+
+  if(opr == "add")
+    for(var i=0; i < exps.length; i++)
+      teacherDetail.addExp( exps[i], function(err, doc){
+        if(err == "already exist") res.send({ status: err });
+        else if(err) res.send({ status: 'ise' });
+        else res.send({ status: 'success' });
+      });
+  else if(opr == "remove")
+    for(var i=0; i < exps.length; i++)
+      teacherDetail.removeExp( exps[i], function(err, doc){
+        if(err == "not found") res.send({ status: err });
+        else if(err) res.send({ status: 'ise' });
+        else res.send({ status: 'success' });
+      });
+  else res.send({ status: 'inv. routing' });
 });
 
 router.post('/awards', isLoggedIn, function (req, res){
