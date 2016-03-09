@@ -187,5 +187,57 @@ exports.teacherDetailMethod = function (teacherDetailSchema) {
     }, cb);
   };
 
+  /**
+  ** Update Qualification
+  ** 1) addQualf 2) removeQualf
+  **/
+  teacherDetailSchema.methods.addQualf = function(qualf, cb){
+    var model = this.model('teacherDetail');
+    var teacherID = this.teacherID;
+
+    model.count({
+      'teacherID': this.teacherID,
+      'qualification': {
+        $elemMatch: {
+          'degree': qualf.degree
+        }
+      }
+    }, function(err, count){
+      if(count == 0){
+        model.update({
+          'teacherID': teacherID,
+        }, {
+          $push: {
+            'qualification': qualf
+          }
+        }, cb);
+      }else cb("already exist", "");
+    });
+  };
+
+  teacherDetailSchema.methods.removeQualf =  function(qualf, cb){
+    var model = this.model('teacherDetail');
+    var teacherID = this.teacherID;
+
+    model.count({
+      'teacherID': this.teacherID,
+      'qualification': {
+        $elemMatch: {
+          'degree': qualf.degree
+        }
+      }
+    }, function(err, count){
+      if(count != 0){
+        model.update({
+          'teacherID': teacherID,
+        }, {
+          $pull: {
+            'qualification': qualf
+          }
+        }, cb);
+      }else cb("not found", "");
+    });
+  }
+
   return teacherDetailSchema;
 };

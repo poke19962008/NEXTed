@@ -39,6 +39,8 @@ router.get('/', isLoggedIn, function(req, res){
 ** Success -> { status: success }
 ** Internal Server Error -> { status: ise }
 ** Invalid Routing -> { status: inv. routing }
+** Subject Already Exist -> { status: already exist }
+** Subject Not Found -> { status: not found }
 **/
 router.post('/:id/subjects', isLoggedIn, function (req, res){
   var opr = req.params.id;
@@ -79,7 +81,7 @@ router.post('/:id/subjects', isLoggedIn, function (req, res){
       for (var i = 0; i < subjects.length; i++) {
         console.log(subjects[i]);
         teacherDetail.removeSubjects(subjects[i], function (err, doc){
-          if(err == "does not exist") res.send({ status: err });
+          if(err == "not found") res.send({ status: err });
           else if(err) res.send({ status: 'ise' });
           else res.send({ status: 'success' });
         });
@@ -98,6 +100,7 @@ router.post('/:id/subjects', isLoggedIn, function (req, res){
 ** RESPONSE
 ** Success -> { status: success }
 ** Internal Server Error -> { status: ise }
+** Inv Body Format -> { status: 'inv. format' }
 **/
 router.post('/email', isLoggedIn, function (req, res){
   var teacherID  = req.session.ID;
@@ -113,13 +116,75 @@ router.post('/email', isLoggedIn, function (req, res){
     'email': body.email
   });
 
-  teacherDetail.updateEmail(function(err, doc){
-    if(err) res.send({ status: 'ise' });
-    else res.send({ status: 'success' });
-  });
+  if(verified)
+    teacherDetail.updateEmail(function(err, doc){
+      if(err) res.send({ status: 'ise' });
+      else res.send({ status: 'success' });
+    });
+  else res.send({ status: 'inv. format' });
 });
 
-router.post('/qualification', isLoggedIn, function (req, res){
+
+/**
+** UPDATE QUALIFICATION (POST)
+** PARAMETERS -> 1) add 2) remove
+** BODY(application/json) ->{qualification: [
+  degree: String,
+  course: String,
+  institute: String
+]}
+** RESPONSE
+** Success -> { status: success }
+** Internal Server Error -> { status: ise }
+** Invalid Body Format -> { status: inv. format }
+** Invalid Routing -> { status: inv. routing }
+** Qualf Already Exist -> { status: already exist }
+** Qualf Not Found -> { status: not found }
+**/
+router.post('/:id/qualification', isLoggedIn, function (req, res){
+  var opr = req.params.id;
+  var data = req.body;
+  var teacherID = req.session.ID;
+  var verified = true;
+
+  // Body Verification
+  if(data.qualification == undefined) verified = false;
+  else {
+    if(data.qualification.length == 0) verified = false;
+    else for (var i = 0; i < data.qualification.length; i++) {
+      if(data.qualification[i].degree == undefined ||
+         data.qualification[i].course == undefined ||
+         data.qualification[i].institute == undefined)
+        verified = false;
+    }
+  }
+
+  // Update Process
+  if(!verified){
+    res.send({ status: 'inv. format' });
+    res.end();
+  }
+
+  var teacherDetail = new TeacherDetail({
+    'teacherID': teacherID
+  });
+  var qualfs = data.qualification;
+
+  if(opr == "add")
+    for(var i=0; i<qualfs.length; i++)
+      teacherDetail.addQualf(qualfs[i], function(err, doc){
+        if(err == "already exist") res.send({ status: err });
+        else if(err) res.send({ status: 'ise' });
+        else res.send({ status: 'success' });
+      });
+  else if(opr == "remove")
+    for(var i=0; i<qualfs.length; i++)
+      teacherDetail.removeQualf(qualfs[i], function(err, doc){
+        if(err) res.send({ status: 'ise' });
+        else if(err == "not found") res.send({ status: err });
+        else res.send({ status: 'success' });
+      });
+  else res.send({ status: 'inv. routing' });
 
 });
 
