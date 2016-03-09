@@ -1,3 +1,9 @@
+/**
+** All the methods for Teacher and teacherDetail models
+** Author: SAYAN DAS
+**/
+
+
 exports.teacherMethod = function(teacherSchema) {
 
   /**

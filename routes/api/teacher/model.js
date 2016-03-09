@@ -1,3 +1,8 @@
+/**
+** Model Formation of Teacher & teacherDetail: model.js
+** Author: SAYAN DAS
+**/
+
 var mongoose = require('mongoose');
 
 var mongoConfig = require('../../../config').mongo.uri;
