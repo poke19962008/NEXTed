@@ -14,8 +14,13 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var mongoStore = require('connect-mongo')(session);
 var sessConfig = require('./config').session;
-var mongoConfig = require('./config').mongo;
 var bodyParser = require('body-parser');
+
+// Mongoose Connection
+var mongoose = require('mongoose');
+var mongoConfig = require('./config').mongo.uri;
+mongoose.connect(mongoConfig);
+exports.mongoose = mongoose;
 
 var app = express();
 
@@ -38,7 +43,7 @@ app.use(session({        // Session configs
   },
 
   store: new mongoStore({     // Mongo Store configs
-    url: mongoConfig.uri,
+    url: mongoConfig,
     autoRemove: 'native', // Remove all the expired sessions
     collection: 'session', // Collection name
   }),

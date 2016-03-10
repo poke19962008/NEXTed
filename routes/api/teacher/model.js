@@ -3,10 +3,7 @@
 ** Author: SAYAN DAS
 **/
 
-var mongoose = require('mongoose');
-
-var mongoConfig = require('../../../config').mongo.uri;
-mongoose.connect(mongoConfig);
+var mongoose = require('../../../server').mongoose;
 
 var teacherSchema = require('../schema/teacher').teacher;
 var teacherDetailSchema = require('../schema/teacher').teacherDetail;

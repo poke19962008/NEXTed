@@ -4,6 +4,7 @@ var router = express.Router();
 // API Routers Declaration
 var teacher = require('./teacher/index');
 var public_  = require('./public/index.js');
+var student = require('./student/index.js');
 
 // API request logger
 router.use(function(req, res, next) {
@@ -17,6 +18,7 @@ router.use(function(req, res, next) {
 // API Router Middleware
 router.use('/teacher', teacher);
 router.use('/public', public_);
+router.use('/student', student);
 
 // API request routing
 router.get('/', function(req, res){
