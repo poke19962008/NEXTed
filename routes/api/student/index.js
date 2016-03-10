@@ -7,11 +7,11 @@ var router = express.Router();
 router.use(function (req, res, next){
   var type = req.session.IDType;
 
-  if(!type != 'student' && type != undefined) res.send({ 'isValidUser': false });
+  if(type != 'student' && type != undefined) res.send({ 'isValidUser': false });
   else next();
 });
 
-function isLoggedIn (req, res, next){
+function isLogedIn (req, res, next){
   var type = req.session.IDType;
   var ID = req.session.ID;
 
@@ -39,17 +39,76 @@ router.get('/login', function (req, res, next){
     student.verifyStudent(function(err, doc){
       if(doc.length == 0) res.send({ 'status': 'failed' });
       else if(doc.length == 1) {
+        student.updateLoginTS(function (err, doc){
+          if(err) { res.send({ 'status': 'ise' }); res.end(); }
+        });
+        var tStamp = doc[0].loggedIn;
+
         req.session.IDType = "student";
         req.session.ID = ID;
 
-        res.send({ 'status': 'success' });
+        res.send({ 'status': 'success', 'tStamp': tStamp });
       }
       else res.send({ 'status': 'ise' });
     });
 });
 
+
 /**
-** CREATE DUMMY USERS (GET)
+** ADD SKILL (POST)
+** TODO: Verify With In Built Skill data sets
+** BODY -> {
+  skill: String
+}
+** RESPONSE
+** Success -> { status: success }
+** Parameters Missing -> { status: params missing }
+** Internal Server Error -> { status: ise }
+**/
+router.post('/addSkill', isLogedIn, function (req, res){
+  var skill = req.body.skill;
+
+  var studentD = new StudentDetail({
+    'studentID': req.session.ID
+  });
+
+  if(skill == undefined || skill == "") {
+    res.send({'status': 'params missing'});
+    res.end();
+  }
+
+  studentD.countSkills(skill, function (err, count){
+    var found = false;
+
+    if(count != 0) found = true;
+
+    if(found) res.send({'status': 'skill exist'});
+    else{
+      studentD.addSkill(skill , function(err, doc){
+        if(err) res.send({'status': 'ise'});
+        else res.send({'status': 'success'});
+      });
+    }
+  });
+});
+
+/**
+** ENDORSE (GET)
+** QUERY -> endorseeID, skill
+** RESPONSE
+** Invalid Routing -> { status: inv routing }
+** Success -> { status: success }
+** Permission Denied -> { status: permissionDenied }
+** Internal Server Error -> { status: ise }
+**/
+
+router.get('/endorse', function(req, res){
+
+});
+
+
+
+/** CREATE DUMMY USERS (GET)
 ** Testing Purpose Only
 **/
 router.get('/createDummyUser', function (req, res){

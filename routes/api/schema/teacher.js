@@ -14,7 +14,11 @@ var teacher = new Schema({
   classes: [{
       class_: String
   }],
-  password: String
+  password: String,
+  loggedIn: {
+    type: Number,
+    default: -1
+  }
 });
 
 var teacherDetail = new Schema({

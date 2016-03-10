@@ -15,7 +15,7 @@ exports.teacherMethod = function(teacherSchema) {
       'teacherID': this.teacherID,
       'password': this.password
     },
-    'teacherID', cb);
+    'teacherID loggedIn', cb);
   };
 
 
@@ -37,6 +37,18 @@ exports.teacherMethod = function(teacherSchema) {
   teacherSchema.methods.limitedSearch = function (cb){
     this.model('teacher').find({},
       'name schoolName', cb);
+  };
+
+  /**
+  ** Update Login Time Stamp
+  **/
+  teacherSchema.methods.updateLoginTS = function(cb) {
+    var timeStamp = Math.floor(Date.now() / 1000);
+    this.model('teacher').update({
+      'teacherID': this.teacherID,
+    }, {
+      'loggedIn': timeStamp
+    }, cb);
   };
 
 

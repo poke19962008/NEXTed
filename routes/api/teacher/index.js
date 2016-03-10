@@ -66,12 +66,21 @@ router.get('/login', function (req, res, next){
   });
 
   teacher.verifyTeacher(function(err, doc){
+    var tStamp;
+
     if(doc.length == 0) res.send({ 'status': 'failed' });
     else if(doc.length == 1) {
+      if(doc[0].loggedIn == -1) {
+        teacher.updateLoginTS(function(err, doc){
+          if(err) { res.redirect('/login'); res.end(); }
+          else tStamp = -1;
+        });
+      }else tStamp = doc[0].loggedIn;
+
       req.session.IDType = "teacher";
       req.session.ID = ID;
 
-      res.send({ 'status': 'success' });
+      res.send({ 'status': 'success', 'tStamp':  tStamp});
     }
     else res.send({ 'status': 'ise' });
   });
