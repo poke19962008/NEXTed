@@ -18,6 +18,26 @@ exports.studentMethod = function(studentSchema) {
     'studentID', cb);
   };
 
+  /**
+  ** Get Details
+  ** Returns `name`, `teacherID` and  `schoolID`
+  ** from `teachers` collection
+  **/
+  studentSchema.methods.getDetails = function (cb){
+    return this.model('student').findOne({
+      'studentID': this.studentID
+    },
+    'name studentID schoolID', cb);
+  };
+
+  /**
+  ** Limited Search
+  **/
+  studentSchema.methods.limitedSearch = function (cb){
+    this.model('student').find({},
+      'name schoolName', cb);
+  };
+
   return studentSchema;
 };
 

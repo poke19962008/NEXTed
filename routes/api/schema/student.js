@@ -40,6 +40,15 @@ var studentDetail = new Schema({
             schoolID: String,
         }]
     }],
+    competition: [{
+      title: String,
+      description: String,
+      date: {
+        date: Number,
+        month: Number,
+        year: Number
+      }
+    }],
     award: [{
         title: String,
         description: String,
