@@ -102,8 +102,6 @@ router.post('/:id/competition', isLoggedIn, function (req, res){
   }
 
   // Update Process
-
-
   try {
     var studentDetail = new StudentDetail({
       'studentID': studentID
@@ -134,6 +132,76 @@ router.post('/:id/competition', isLoggedIn, function (req, res){
   }
 });
 
+/**
+** UPDATE AWARDS (POST)
+** PARAMETERS -> 1) add 2) remove
+** BODY(application/json) ->{experience: [
+  title: String,
+  description: String,
+  date: {
+    date: Number,
+    month: Number,
+    year: Number
+  }
+]}
+** RESPONSE
+** Success -> { status: success }
+** Internal Server Error -> { status: ise }
+** Invalid Body Format -> { status: inv. format }
+** Invalid Routing -> { status: inv. routing }
+** Award Already Exist -> { status: already exist }
+** Award Not Found -> { status: not found }
+**/
+router.post('/:id/award', isLoggedIn, function (req, res){
+  var opr = req.params.id;
+  var data = req.body;
+  var studentID = req.session.ID;
+  var verified = true;
 
+  // Body Verification
+  if(data.award == undefined) verified = false;
+  else {
+    if(data.award.length == 0) verified = false;
+    else for (var i = 0; i < data.award.length; i++) {
+      if(data.award[i].date != undefined){
+        if(data.award[i].title == undefined ||
+           data.award[i].description == undefined ||
+           data.award[i].date.date == undefined ||
+           data.award[i].date.month == undefined ||
+           data.award[i].date.year == undefined)
+          {verified = false; break;}
+      } else {verified = false; break;}
+    }
+  }
+
+  // Update Process
+  var studentDetail = new StudentDetail({
+    'studentID': studentID
+  });
+  var awards = data.award;
+
+  try {
+    if(opr == "add")
+      for(var i=0; i < awards.length; i++)
+        studentDetail.addAward( awards[i], function(err, doc){
+          if(err == "already exist") res.send({ status: err });
+          else if(err) res.send({ status: 'ise' });
+          else res.send({ status: 'success' });
+        });
+    else if(opr == "remove")
+      for(var i=0; i < awards.length; i++)
+        studentDetail.removeAward( awards[i], function(err, doc){
+          if(err == "not found") res.send({ status: err });
+          else if(err) res.send({ status: 'ise' });
+          else res.send({ status: 'success' });
+        });
+    else res.send({ status: 'inv. routing' });
+  } catch(e){
+    if(!verified){
+      res.send({ status: 'inv. format' });
+      res.end();
+    }
+  }
+});
 
 module.exports = router;

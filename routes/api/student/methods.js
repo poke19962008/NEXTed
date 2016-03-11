@@ -147,6 +147,57 @@ exports.studentDetailMethod = function(studentDetailSchema) {
     });
   };
 
+  /**
+  ** Update Award
+  ** 1) addAward 2) removeAward
+  **/
+  studentDetailSchema.methods.addAward = function(award, cb){
+    var model = this.model('studentDetail');
+    var studentID = this.studentID;
+
+    model.count({
+      'studentID': this.studentID,
+      'award': {
+        $elemMatch: {
+          'title': award.title
+        }
+      }
+    }, function(err, count){
+      if(count == 0){
+        model.update({
+          'studentID': studentID,
+        }, {
+          $push: {
+            'award': award
+          }
+        }, cb);
+      }else cb("already exist", "");
+    });
+  };
+
+  studentDetailSchema.methods.removeAward =  function(award, cb){
+    var model = this.model('studentDetail');
+    var studentID = this.studentID;
+
+    model.count({
+      'studentID': this.studentID,
+      'award': {
+        $elemMatch: {
+          'title': award.title
+        }
+      }
+    }, function(err, count){
+      if(count != 0){
+        model.update({
+          'studentID': studentID,
+        }, {
+          $pull: {
+            'award': award
+          }
+        }, cb);
+      }else cb("not found", "");
+    });
+  };
 
   return studentDetailSchema;
 };

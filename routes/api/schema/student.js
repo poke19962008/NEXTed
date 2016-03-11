@@ -11,9 +11,10 @@ var student = new Schema({
       mName: String,
       lName: String
   },
-  classes: [{
-      class_: String
-  }],
+  classes: {
+      class_: String,
+      section: String
+  },
   password: String,
   loggedIn: {
     type: Number,
@@ -24,7 +25,6 @@ var student = new Schema({
 var studentDetail = new Schema({
     studentID: String,
     schoolID: String,
-    designation: String,
     email: String,
     skills: [{
         skill: String,
