@@ -82,6 +82,71 @@ exports.studentDetailMethod = function(studentDetailSchema) {
     }, cb);
   };
 
+  /**
+  ** Update Email
+  **/
+  studentDetailSchema.methods.updateEmail = function(cb){
+    this.model('studentDetail').update({
+      'studentID': this.studentID
+    }, {
+      $set: {
+        'email': this.email
+      }
+    }, cb);
+  };
+
+  /**
+  ** Update Experience
+  ** 1) addExp 2) removeExp
+  **/
+  studentDetailSchema.methods.addExp = function(exp, cb){
+    var model = this.model('studentDetail');
+    var studentID = this.studentID;
+
+    model.count({
+      'studentID': this.studentID,
+      'competition': {
+        $elemMatch: {
+          'title': exp.title
+        }
+      }
+    }, function(err, count){
+      if(count == 0){
+        model.update({
+          'studentID': studentID,
+        }, {
+          $push: {
+            'competition': exp
+          }
+        }, cb);
+      }else cb("already exist", "");
+    });
+  };
+
+  studentDetailSchema.methods.removeExp =  function(exp, cb){
+    var model = this.model('studentDetail');
+    var studentID = this.studentID;
+
+    model.count({
+      'studentID': this.studentID,
+      'competition': {
+        $elemMatch: {
+          'title': exp.title
+        }
+      }
+    }, function(err, count){
+      if(count != 0){
+        model.update({
+          'studentID': studentID,
+        }, {
+          $pull: {
+            'competition': exp
+          }
+        }, cb);
+      }else cb("not found", "");
+    });
+  };
+
 
   return studentDetailSchema;
 };

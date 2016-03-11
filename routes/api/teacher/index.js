@@ -24,7 +24,7 @@ var router = express.Router();
 // Teacher Router middleware checks if IDType is valid
 router.use(function (req, res, next){
   var type = req.session.IDType;
-
+  console.log(req.session);
   if(type != 'teacher' && type != undefined ) res.send({ 'isValidUser': false });
   else next();
 });

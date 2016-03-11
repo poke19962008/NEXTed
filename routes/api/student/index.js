@@ -1,6 +1,8 @@
 var Student = require('./model').student;
 var StudentDetail = require('./model').studentDetail;
 
+var updateRouter = require('./update');
+
 var express = require('express');
 var router = express.Router();
 
@@ -101,11 +103,15 @@ router.post('/addSkill', isLogedIn, function (req, res){
 ** Permission Denied -> { status: permissionDenied }
 ** Internal Server Error -> { status: ise }
 **/
-
-router.get('/endorse', function(req, res){
+router.get('/endorse', isLogedIn, function(req, res){
 
 });
 
+
+/**
+** UPDATE
+**/
+router.use('/update', updateRouter);
 
 
 /** CREATE DUMMY USERS (GET)
@@ -116,7 +122,7 @@ router.get('/createDummyUser', function (req, res){
     studentID: '123testID',
     schoolID: '123SchoolID',
     name: {
-      fName: 'Sayn',
+      fName: 'Sayan',
       mNae: 'Kr.',
       lName: 'Das'
     },

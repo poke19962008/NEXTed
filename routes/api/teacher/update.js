@@ -116,12 +116,18 @@ router.post('/email', isLoggedIn, function (req, res){
     'email': body.email
   });
 
-  if(verified)
+  try {
     teacherDetail.updateEmail(function(err, doc){
       if(err) res.send({ status: 'ise' });
       else res.send({ status: 'success' });
     });
-  else res.send({ status: 'inv. format' });
+  } catch(e){
+    if(!verified){
+      res.send({ status: 'inv. format' });
+      res.end();
+    }
+  }
+
 });
 
 
@@ -160,31 +166,33 @@ router.post('/:id/qualification', isLoggedIn, function (req, res){
   }
 
   // Update Process
-  if(!verified){
-    res.send({ status: 'inv. format' });
-    res.end();
-  }
-
   var teacherDetail = new TeacherDetail({
     'teacherID': teacherID
   });
   var qualfs = data.qualification;
 
-  if(opr == "add")
-    for(var i=0; i<qualfs.length; i++)
-      teacherDetail.addQualf(qualfs[i], function(err, doc){
-        if(err == "already exist") res.send({ status: err });
-        else if(err) res.send({ status: 'ise' });
-        else res.send({ status: 'success' });
-      });
-  else if(opr == "remove")
-    for(var i=0; i<qualfs.length; i++)
-      teacherDetail.removeQualf(qualfs[i], function(err, doc){
-        if(err == "not found") res.send({ status: err });
-        else if(err) res.send({ status: 'ise' });
-        else res.send({ status: 'success' });
-      });
-  else res.send({ status: 'inv. routing' });
+  try {
+    if(opr == "add")
+      for(var i=0; i<qualfs.length; i++)
+        teacherDetail.addQualf(qualfs[i], function(err, doc){
+          if(err == "already exist") res.send({ status: err });
+          else if(err) res.send({ status: 'ise' });
+          else res.send({ status: 'success' });
+        });
+    else if(opr == "remove")
+      for(var i=0; i<qualfs.length; i++)
+        teacherDetail.removeQualf(qualfs[i], function(err, doc){
+          if(err == "not found") res.send({ status: err });
+          else if(err) res.send({ status: 'ise' });
+          else res.send({ status: 'success' });
+        });
+    else res.send({ status: 'inv. routing' });
+  } catch(e){
+    if(!verified){
+      res.send({ status: 'inv. format' });
+      res.end();
+    }
+  }
 
 });
 
@@ -232,31 +240,33 @@ router.post('/:id/experience', isLoggedIn, function (req, res){
   }
 
   // Update Process
-  if(!verified){
-    res.send({ status: 'inv. format' });
-    res.end();
-  }
-
   var teacherDetail = new TeacherDetail({
     'teacherID': teacherID
   });
   var exps = data.experience;
 
-  if(opr == "add")
-    for(var i=0; i < exps.length; i++)
-      teacherDetail.addExp( exps[i], function(err, doc){
-        if(err == "already exist") res.send({ status: err });
-        else if(err) res.send({ status: 'ise' });
-        else res.send({ status: 'success' });
-      });
-  else if(opr == "remove")
-    for(var i=0; i < exps.length; i++)
-      teacherDetail.removeExp( exps[i], function(err, doc){
-        if(err == "not found") res.send({ status: err });
-        else if(err) res.send({ status: 'ise' });
-        else res.send({ status: 'success' });
-      });
-  else res.send({ status: 'inv. routing' });
+  try {
+    if(opr == "add")
+      for(var i=0; i < exps.length; i++)
+        teacherDetail.addExp( exps[i], function(err, doc){
+          if(err == "already exist") res.send({ status: err });
+          else if(err) res.send({ status: 'ise' });
+          else res.send({ status: 'success' });
+        });
+    else if(opr == "remove")
+      for(var i=0; i < exps.length; i++)
+        teacherDetail.removeExp( exps[i], function(err, doc){
+          if(err == "not found") res.send({ status: err });
+          else if(err) res.send({ status: 'ise' });
+          else res.send({ status: 'success' });
+        });
+    else res.send({ status: 'inv. routing' });
+  } catch(e){
+    if(!verified){
+      res.send({ status: 'inv. format' });
+      res.end();
+    }
+  }
 });
 
 /**
@@ -302,31 +312,33 @@ router.post('/:id/award', isLoggedIn, function (req, res){
   }
 
   // Update Process
-  if(!verified){
-    res.send({ status: 'inv. format' });
-    res.end();
-  }
-
   var teacherDetail = new TeacherDetail({
     'teacherID': teacherID
   });
   var awards = data.award;
 
-  if(opr == "add")
-    for(var i=0; i < awards.length; i++)
-      teacherDetail.addAward( awards[i], function(err, doc){
-        if(err == "already exist") res.send({ status: err });
-        else if(err) res.send({ status: 'ise' });
-        else res.send({ status: 'success' });
-      });
-  else if(opr == "remove")
-    for(var i=0; i < awards.length; i++)
-      teacherDetail.removeAward( awards[i], function(err, doc){
-        if(err == "not found") res.send({ status: err });
-        else if(err) res.send({ status: 'ise' });
-        else res.send({ status: 'success' });
-      });
-  else res.send({ status: 'inv. routing' });
+  try {
+    if(opr == "add")
+      for(var i=0; i < awards.length; i++)
+        teacherDetail.addAward( awards[i], function(err, doc){
+          if(err == "already exist") res.send({ status: err });
+          else if(err) res.send({ status: 'ise' });
+          else res.send({ status: 'success' });
+        });
+    else if(opr == "remove")
+      for(var i=0; i < awards.length; i++)
+        teacherDetail.removeAward( awards[i], function(err, doc){
+          if(err == "not found") res.send({ status: err });
+          else if(err) res.send({ status: 'ise' });
+          else res.send({ status: 'success' });
+        });
+    else res.send({ status: 'inv. routing' });
+  } catch(e){
+    if(!verified){
+      res.send({ status: 'inv. format' });
+      res.end();
+    }
+  }
 });
 
 module.exports = router;
