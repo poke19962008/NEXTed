@@ -3,10 +3,12 @@
 ** Author: SAYAN DAS
 **/
 
-var Teacher = require('./model').teacher;
-var TeacherDetail = require('./model').teacherDetail;
 
 var updateRouter = require('./update');
+
+// Teacher & TeacherDetail models
+var Teacher = require('./model').teacher;
+var TeacherDetail = require('./model').teacherDetail;
 
 var express = require('express');
 var router = express.Router();
@@ -87,7 +89,18 @@ router.get('/login', function (req, res, next){
 
 });
 
-
+/**
+** LOGOUT
+** RESPONSE
+** Success -> { status: succcess }
+** Internal Server Error -> { status; ise }
+**/
+router.get('/logout', function (req, res){
+  req.session.destroy(function (err){
+    if(err) res.send({ status: 'ise' });
+    else res.send({ status: 'success'});
+  });
+});
 
 /**
 ** ADD SKILL (POST)

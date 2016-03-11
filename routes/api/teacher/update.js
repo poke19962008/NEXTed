@@ -132,6 +132,45 @@ router.post('/email', isLoggedIn, function (req, res){
 
 
 /**
+** UPDATE DESIGNATION (POST)
+** TODO: Regex Verification of Email
+** BODY(application/json) ->
+** { desig: String }
+** RESPONSE
+** Success -> { status: success }
+** Internal Server Error -> { status: ise }
+** Inv Body Format -> { status: 'inv. format' }
+**/
+router.post('/designation', isLoggedIn, function (req, res){
+  var teacherID  = req.session.ID;
+  var body = req.body;
+  var verified = true;
+
+  // Body Verification
+  if(body.desig == undefined) verified = false;
+
+  // Update Process
+  var teacherDetail = new TeacherDetail({
+    'teacherID': teacherID,
+    'designation': body.desig
+  });
+
+  try {
+    teacherDetail.updateDesig(function(err, doc){
+      if(err) res.send({ status: 'ise' });
+      else res.send({ status: 'success' });
+    });
+  } catch(e){
+    if(!verified){
+      res.send({ status: 'inv. format' });
+      res.end();
+    }
+  }
+
+});
+
+
+/**
 ** UPDATE QUALIFICATION (POST)
 ** PARAMETERS -> 1) add 2) remove
 ** BODY(application/json) ->{qualification: [

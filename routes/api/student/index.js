@@ -1,7 +1,13 @@
-var Student = require('./model').student;
-var StudentDetail = require('./model').studentDetail;
+/**
+** Student API: index.js
+** Author: SAYAN DAS
+**/
 
 var updateRouter = require('./update');
+
+// Student & StudentDetail models
+var Student = require('./model').student;
+var StudentDetail = require('./model').studentDetail;
 
 var express = require('express');
 var router = express.Router();
@@ -26,6 +32,15 @@ router.get('/', function(req, res){
   res.send('Welcome to Student API');
 });
 
+
+/**
+** LOGIN (GET)
+** Query -> studentID & password
+** RESPONSE
+** Success -> { status: success }
+** Verification Failure -> { status: failed }
+** Internal Server Error -> { status: ise }
+**/
 router.get('/login', function (req, res, next){
 
     var password = req.query.password;
@@ -55,6 +70,19 @@ router.get('/login', function (req, res, next){
     });
 });
 
+
+/**
+** LOGOUT
+** RESPONSE
+** Success -> { status: succcess }
+** Internal Server Error -> { status; ise }
+**/
+router.get('/logout', function (req, res){
+  req.session.destroy(function (err){
+    if(err) res.send({ status: 'ise' });
+    else res.send({ status: 'success'});
+  });
+});
 
 /**
 ** ADD SKILL (POST)

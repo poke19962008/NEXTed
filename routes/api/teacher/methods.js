@@ -206,6 +206,19 @@ exports.teacherDetailMethod = function (teacherDetailSchema) {
   };
 
   /**
+  ** Update Designation
+  **/
+  teacherDetailSchema.methods.updateDesig = function(cb){
+    this.model('teacherDetail').update({
+      'teacherID': this.teacherID
+    }, {
+      $set: {
+        'designation': this.designation
+      }
+    }, cb);
+  };
+
+  /**
   ** Update Qualification
   ** 1) addQualf 2) removeQualf
   **/
