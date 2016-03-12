@@ -2,7 +2,8 @@
 <html>
 <head>
   <title></title>
-<link rel="stylesheet" type="text/css" href="include.css">
+  <link rel="stylesheet" type="text/css" href="css/include.css">
+  <link rel="stylesheet" type="text/css" href="css/switch.css">
 </head>
 <body class="align">
 
@@ -12,6 +13,18 @@
 
       <form action="" method="post" class="form form--login">
 
+        <div class="colorful-switch">
+          <input type="checkbox" class="colorful-switch__checkbox" id="colorful-switch-cb" />
+          <label class="colorful-switch__label" for="colorful-switch-cb">
+            <span class="colorful-switch__bg"></span>
+            <span class="colorful-switch__dot"></span>
+            <span class="colorful-switch__on">
+              <span class="colorful-switch__on__inner"></span>
+            </span>
+            <span class="colorful-switch__off"></span>
+          </label>
+        </div>
+        
         <div class="form__field">
           <label class="fontawesome-user" for="login__username"><span class="hidden">Username</span></label>
           <input id="login__username" type="text" class="form__input" placeholder="Username" required>
