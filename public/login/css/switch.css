@@ -1,30 +1,15 @@
 .colorful-switch {
   position: absolute;
-  left: 50%;
-  top: 30%;
+  /*left: 60%;*/
+  top: 37%;
   width: 80px;
   height: 34.28571px;
   margin-left: -40px;
   margin-top: -17.14286px;
   border-radius: 14.28571px;
   background: #cfcfcf;
+  margin-left: 238.7px;
 }
-/*.colorful-switch:before {
-  content: "";
-  z-index: -1;
-  position: absolute;
-  left: -5px;
-  top: -5px;
-  width: 90px;
-  height: 44.28571px;
-  border-radius: 19.28571px;
-  background: #314239;
-  -webkit-transition: background-color 0.3s;
-  transition: background-color 0.3s;
-}*/
-/*.colorful-switch:hover:before {
-  background: #4C735F;
-}*/
 .colorful-switch__checkbox {
   z-index: -10;
   position: absolute;
