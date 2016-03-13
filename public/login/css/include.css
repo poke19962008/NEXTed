@@ -125,7 +125,12 @@ input {
 }
 
 .text--center {
-  text-align: left;
+      text-align: left;
+    font-size: 20px;
+    color: grey;
+    position: relative;
+    top: 5px;
+
 }
 
 .grid__container {
