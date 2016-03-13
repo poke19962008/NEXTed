@@ -35,7 +35,7 @@ router.get('/', function(req, res){
 
 /**
 ** LOGIN (GET)
-** Query -> studentID & password
+** Query -> ID & password
 ** RESPONSE
 ** Success -> { status: success }
 ** Verification Failure -> { status: failed }
