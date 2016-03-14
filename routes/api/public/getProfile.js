@@ -20,29 +20,24 @@ router.get('/', function(req, res){
 **/
 router.get('/student', function (req, res){
   var id;
-  var data = {};
-  console.log(req.session);
   try{
     if(req.query.ID != undefined)
       id = req.query.ID;
     else throw true;
 
-    data.studentID = id;
     Student.findOne({
       studentID: id
-    }, function(err, doc){
+    }, "name", function(err, doc){
       if(err || doc == undefined) throw true;
       var name = doc.name;
 
       StudentDetail.findOne({
         studentID: id
       },
-      "bio designation personalInfo skills competition award", function(err, doc){
+      "studentID bio designation personalInfo skills competition award", function(err, doc){
         if(err || doc == undefined) throw true;
-        data = doc;
-        data.name = name;
-        console.log(data);
-        res.send(data);
+        doc.name = name;
+        res.send({name: name, detail: doc});
       });
     });
   }catch(e){
