@@ -13,8 +13,7 @@ router.get('/', function(req, res){
 
 /**
 ** Students Get Profile
-** If query is undefined then check for Session
-** return the profile of session id else throws Error
+** QUERY: ID
 ** RESPONSE:
 ** Success: bio designation personalInfo skills competition award name studentID
 ** Failed
@@ -26,7 +25,6 @@ router.get('/student', function (req, res){
   try{
     if(req.query.ID != undefined)
       id = req.query.ID;
-    else if(req.session.ID != undefined && req.session.IDType == 'student') id = req.session.ID;
     else throw true;
 
     data.studentID = id;

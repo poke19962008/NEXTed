@@ -26,12 +26,14 @@ var app = express();
 
 // Routes Declaration
 var api = require("./routes/api/index.js");
+var getProfile = require("./routes/getProfile");
 
 // Session/Cookie Middlewares
 app.use(express.static(__dirname + '/public'));
 app.use(cookieParser());
 app.use(bodyParser.json());  // JSON encoded body parser
 app.use(bodyParser.urlencoded({ extended: true }));
+app.set('view engine', 'ejs'); // Set the View Engine
 app.use(session({        // Session configs
   secret: sessConfig.key,
   saveUninitialized: true,
@@ -50,6 +52,7 @@ app.use(session({        // Session configs
 }));
 
 // Router Middlewares
+app.use("/profile", getProfile);
 app.use("/api", api);
 
 
