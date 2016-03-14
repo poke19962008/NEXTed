@@ -6,6 +6,7 @@ var teacher = new Schema({
   schoolID: String,
   teacherID: String,
   schoolName: String,
+  bio: String,
   name: {
       fName: String,
       mName: String,
