@@ -4,94 +4,100 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
 		<meta name="viewport" content="width=device-width, initial-scale=1"> 
-		<title>Minimal Form Interface</title>
-		<meta name="description" content="Minimal Form Interface: Simplistic, single input view form" />
-		<meta name="keywords" content="form, minimal, interface, single input, big form, responsive form, transition" />
-		<meta name="author" content="Codrops" />
+		<title>Fullscreen Form Interface</title>
+		
 		<link rel="shortcut icon" href="../favicon.ico">
 		<link rel="stylesheet" type="text/css" href="css/normalize.css" />
 		<link rel="stylesheet" type="text/css" href="css/demo.css" />
 		<link rel="stylesheet" type="text/css" href="css/component.css" />
+		<link rel="stylesheet" type="text/css" href="css/cs-select.css" />
+		<link rel="stylesheet" type="text/css" href="css/cs-skin-boxes.css" />
+
+
 		<script src="js/modernizr.custom.js"></script>
 	</head>
 	<body>
 		<div class="container">
-			<!-- Top Navigation -->
-			<div class="codrops-top clearfix">
-				
-				
-			</div>
-			<header class="codrops-header">
-				<h1>Building your Profile <span>Just keep answering series of questions</span></h1>	
-			</header>
-			<section>
-				<form id="theForm" class="simform" autocomplete="off">
-					<div class="simform-inner">
-						<ol class="questions">
-							<li>
-								<span><label for="q1">What's your Email?</label></span>
-								<input id="q1" name="q1" type="text"/>
-							</li>
-							<li>
-								<span><label for="q2">What's your Designation?</label></span>
-								<input id="q2" name="q2" type="text"/>
 
-							</li>
-							<li>
-								<span><label for="q3">What's your qualifications/Degree (If Multiple,seperate by comma)?</label></span>
-								<input id="q3" name="q3" type="text"/>
-							</li>
-							<li>
-								<span><label for="q4">Skillset seperated by Comma?</label></span>
-								<input id="q4" name="q4" type="text"/>
-							</li>
-							<li>
-								<span><label for="q5">What book inspires you?</label></span>
-								<input id="q5" name="q5" type="text"/>
-							</li>
-							<li>
-								<span><label for="q6">What's your profession?</label></span>
-								<input id="q6" name="q6" type="text"/>
-							</li>
-						</ol><!-- /questions -->
-						<button class="submit" type="submit">Send answers</button>
-						<div class="controls">
-							<button class="next"></button>
-							<div class="progress"></div>
-							<span class="number">
-								<span class="number-current"></span>
-								<span class="number-total"></span>
-							</span>
-							<span class="error-message"></span>
-						</div><!-- / controls -->
-					</div><!-- /simform-inner -->
-					<span class="final-message"></span>
-				</form><!-- /simform -->			
-			</section>
+			<div class="fs-form-wrap" id="fs-form-wrap">
+				<div class="fs-title">
+					<h1>Update Your Information</h1>
+					<div class="codrops-top">
+						
+					</div>
+				</div>
+				<form id="myform" class="fs-form fs-form-full" autocomplete="off">
+					<ol class="fs-fields">
+						<li>
+							<label class="fs-field-label fs-anim-upper" for="q1">What's your Designation?</label>
+							<input class="fs-anim-lower" id="q1" name="q1" type="text" placeholder="Head of Department" required/>
+							<br>
+							<label class="fs-field-label fs-anim-upper" for="q1">Biography ?</label>
+							<textarea class="fs-anim-lower" id="q2" name="q4" placeholder="Describe here"></textarea>
+						</li>
+						<li>
+							<label class="fs-field-label fs-anim-upper" for="q2" data-info="We won't send you spam, we promise...">What's your email address?</label>
+							<input class="fs-anim-lower" id="q3" name="q33" type="email" placeholder="dean@road.us" required/>
+						</li>
+						<li data-input-trigger>
+							<label class="fs-field-label fs-anim-upper" for="q3" data-info="This will help us know what kind of service you need">What are your Qualifications?(Latest One)</label>
+							<input class="fs-anim-lower" id="q4" name="q3" type="text" placeholder="Degree" required/>
+							<input class="fs-anim-lower" id="q5" name="q4" type="text" placeholder="Course" required/>
+							<input class="fs-anim-lower" id="q6" name="q5" type="text" placeholder="Institute" required/>
+							
+						</li>
+						<li data-input-trigger>
+							<label class="fs-field-label fs-anim-upper" data-info="We'll make sure to use it all over">Most Prestigius Award ?</label>
+							<input class="fs-anim-lower" id="q7" name="q1" type="text" placeholder="Title" required/>
+							<input class="fs-anim-lower" id="q8" name="q1" type="text" placeholder="D/M/Y(8/March/2016)" required/>
+							<input class="fs-anim-lower" id="q9" name="q1" type="text" placeholder="Description" required/>
+							
+						</li>
+						<li>
+							<label class="fs-field-label fs-anim-upper" for="q4">Enter your skills ? (Seperated by Comma)</label>
+							
+							<textarea class="fs-anim-lower" id="q10" name="q4" placeholder="Describe here"></textarea>
+						</li>
+						<li>
+							<label class="fs-field-label fs-anim-upper" for="q5">Experience ? </label>
+							<input class="fs-anim-lower" id="q11" name="q1" type="text" placeholder="Title" required/>
+							<input class="fs-anim-lower" id="q12" name="q1" type="text" placeholder="D/M/Y(8/March/2016)" required/>
+							<textarea class="fs-anim-lower" id="q13" name="q4" placeholder="Describe here"></textarea>
+							
+						</li>
+					</ol><!-- /fs-fields -->
+					<button class="fs-submit" type="submit">Send answers</button>
+				</form><!-- /fs-form -->
+			</div><!-- /fs-form-wrap -->
+
+			
 
 		</div><!-- /container -->
 		<script src="js/classie.js"></script>
-		<script src="js/stepsForm.js"></script>
+		<script src="js/selectFx.js"></script>
+				<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.3.min.js" ></script>
+		<script type="text/javascript" src="js/ajaxed.js"></script>
+		
+		<script src="js/fullscreenForm.js"></script>
 		<script>
-			var theForm = document.getElementById( 'theForm' );
+			(function() {
+				var formWrap = document.getElementById( 'fs-form-wrap' );
 
-			new stepsForm( theForm, {
-				onSubmit : function( form ) {
-					// hide form
-					classie.addClass( theForm.querySelector( '.simform-inner' ), 'hide' );
+				[].slice.call( document.querySelectorAll( 'select.cs-select' ) ).forEach( function(el) {	
+					new SelectFx( el, {
+						stickyPlaceholder: false,
+						onChange: function(val){
+							document.querySelector('span.cs-placeholder').style.backgroundColor = val;
+						}
+					});
+				} );
 
-					/*
-					form.submit()
-					or
-					AJAX request (maybe show loading indicator while we don't have an answer..)
-					*/
-
-					// let's just simulate something...
-					var messageEl = theForm.querySelector( '.final-message' );
-					messageEl.innerHTML = 'Thank you! We\'ll be in touch.';
-					classie.addClass( messageEl, 'show' );
-				}
-			} );
+				new FForm( formWrap, {
+					onReview : function() {
+						classie.add( document.body, 'overview' ); 
+					}
+				} );
+			})();
 		</script>
 	</body>
 </html>
