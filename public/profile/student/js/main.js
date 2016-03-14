@@ -11,7 +11,14 @@
                   "September",
                   "October",
                   "November",
-                  "December"]
+                  "December"];
+    function date2str(date){
+      var str=months[date.month-1]+" ";
+      str += date.date + " ,";
+      str += date.year;
+
+      return str;
+    }
 
     myApp.controller('ProfileCtrl',function($scope){
       $.ajax({
@@ -25,15 +32,27 @@
            name += (msg.name.mName != undefined)? " "+msg.name.mName: "";
            name += (msg.name.lName != undefined)? " "+msg.name.lName: "";
 
-           var dob=months[msg.detail.personalInfo.dateOfBirth.month-1]+" ";
-           dob += msg.detail.personalInfo.dateOfBirth.date + " ,";
-           dob += msg.detail.personalInfo.dateOfBirth.year;
+           var dob = date2str(msg.detail.personalInfo.dateOfBirth);
+
+           var designation = msg.detail.designation.class_ + "-";
+           designation += msg.detail.designation.section ;
+
+           var awards = msg.detail.award;
+           for (var i = 0; i < awards.length; i++) {
+             awards[i].date = date2str(awards[i].date);
+           }
+
+           var comps = msg.detail.competition;
+           for (var i = 0; i < comps.length; i++) {
+             comps[i].date = date2str(comps[i].date);
+           }
 
            var email = msg.detail.personalInfo.email;
            var address = msg.detail.personalInfo.address;
            var phone = msg.detail.personalInfo.phone;
            var blog = msg.detail.personalInfo.blog;
            var bio = msg.detail.bio;
+
 
            $scope.$apply(function(){
              $scope.name = name;
@@ -43,6 +62,9 @@
              $scope.phone = phone;
              $scope.blog = blog;
              $scope.bio = bio;
+             $scope.designation = designation;
+             $scope.awards = awards;
+             $scope.comps = comps;
            });
          });
     });

@@ -33,7 +33,7 @@
                         <div class="user-head">
                             <h1>{{name}}</h1>
                             <div class="hr-center"></div>
-                            <h5>DPS R.K PURAM <br><br>VIII-B</h5>
+                            <h5>DPS R.K PURAM <br><br>{{designation}}</h5>
                         </div>
                     </div>
                     <div class="link-me">
@@ -107,25 +107,17 @@
                             <li id="resume">
                                 <div class="timeline-badge warning"></div>
                                 <div class="timeline-panel">
-                                    <h1>Work Experience</h1>
+                                    <h1>Honors and Awards</h1>
                                     <div class="hr-left"></div>
-                                    <div class="work-experience">
-                                        <h3>Web designer</h3>
-                                        <small><i class="fa fa-calendar" data-original-title="" title=""></i> 2010 - 2014</small>
-                                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                    <div ng-repeat="award in awards">
+                                      <div class="work-experience">
+                                          <h3>{{award.title}}</h3>
+                                          <small><i class="fa fa-calendar" data-original-title="" title=""></i>{{award.date}}</small>
+                                          <p>{{award.description}}</p>
+                                      </div>
+                                      <hr>
                                     </div>
-                                    <hr>
-                                    <div class="work-experience">
-                                        <h3>Graphic Designer</h3>
-                                        <small><i class="fa fa-calendar" data-original-title="" title=""></i> 2010 - 2012</small>
-                                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                                    </div>
-                                    <hr>
-                                    <div class="work-experience">
-                                        <h3>Web Security</h3>
-                                        <small><i class="fa fa-calendar" data-original-title="" title=""></i> 2008 - 2010</small>
-                                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                                    </div>
+
                                 </div>
                             </li>
                             <li id="resume">
@@ -133,25 +125,15 @@
                                 <div class="timeline-panel">
                                     <div class="row display:flex"><div class="col-xs-2"><h1>Qualification</h1></div><div class="col-xs-10"><a data-toggle="modal" data-target="#myModal1"><span class="glyphicon glyphicon-plus" style="float:right;font-size:30px"></span></a></div></div>
                                     <div class="hr-left"></div>
-                                    <div class="work-experience">
-                                        <h3>SRM University</h3>
-                                        <small><i class="fa fa-calendar" data-original-title="" title=""></i> 2010 - 2014</small>
-                                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
-                                        </p>
-                                    </div>
-                                    <hr>
-                                    <div class="work-experience">
-                                        <h3>Institute IT</h3>
-                                        <small><i class="fa fa-calendar" data-original-title="" title=""></i> 2010 - 2012</small>
-                                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
-                                        </p>
-                                    </div>
-                                    <hr>
-                                    <div class="work-experience">
-                                        <h3>Web Design School</h3>
-                                        <small><i class="fa fa-calendar" data-original-title="" title=""></i> 2008 - 2010</small>
-                                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.
-                                        </p>
+
+                                    <div ng-repeat="comp in comps">
+                                      <div class="work-experience">
+                                          <h3>{{comp.title}}</h3>
+                                          <small><i class="fa fa-calendar" data-original-title="" title=""></i> {{comp.date}}</small>
+                                          <p>{{comp.description}}
+                                          </p>
+                                      </div>
+                                      <hr>
                                     </div>
                                 </div>
                             </li>
