@@ -862,3 +862,40 @@ body{margin:40px;}
 #endList {
   color:white;float:right;padding-top:5px;
 }
+
+.updateModal input {
+  background-color: #64DBC5;
+  padding: 1rem;
+  border: 0;
+  border-radius: 0.45rem;
+  width: 100%;
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.95rem;
+  height: 4.8rem;
+  font-weight: bolder;
+  color: #555;
+}
+
+.updateModal input:hover {
+  color: #71BEAF;
+}
+
+.updateModal input::-webkit-input-placeholder {
+  color: #F8F8F8;
+}
+
+.updateModal button[type="submit"] {
+  padding: 1.5rem;
+  width: 19.5rem;
+  background-color: #DA658C;
+  border: 0;
+  border-radius: 0.5rem;
+  font-family: "Open Sans", sans-serif;
+  font-weight: bolder;
+  font-size: 2rem;
+  color: #333;
+}
+
+.updateModal button[type="submit"]:hover{
+  background-color: #d44179;
+}
