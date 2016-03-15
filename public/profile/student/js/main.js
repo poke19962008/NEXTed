@@ -91,6 +91,10 @@
                 $scope.ends = skills[index].endorser;
               });
            });
+
+           $("#skill_counter").click(function(){
+             moAnimate(this);
+           });
          });
     });
 })(window.angular);

@@ -64,7 +64,10 @@ router.get('/login', function (req, res, next){
         req.session.IDType = "student";
         req.session.ID = ID;
 
-        res.send({ 'status': 'success', 'tStamp': tStamp });
+        res.send({
+          'status': 'success',
+          'tStamp': tStamp
+        });
       }
       else res.send({ 'status': 'ise' });
     });

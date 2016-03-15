@@ -39,7 +39,10 @@ var studentDetail = new Schema({
     },
     skills: [{
         skill: String,
-        counter: 0,
+        counter: {
+          type: Number,
+          default: 0
+        },
         endorser: [{
             name: {
                 fName: String,

@@ -76,6 +76,7 @@ exports.studentDetailMethod = function(studentDetailSchema) {
       $push: {
         'skills': {
           'skill': skillName,
+          'counter': 0,
           'endorser': []
         }
       }

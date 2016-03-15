@@ -46,9 +46,15 @@ $(document).ready(function(){
         }
         else if(msg.status == "success"){
           if(msg.tStamp == -1) window.location = "../update";
-          else toastr.success('Yo!'); //TODO: Redirect to Profile
+          else {
+            var type = (toggleSwitch)?
+             "teacher":
+             "student";
+            window.location = "../profile/"+type;
+          }
         }
         else if (!msg.isValidUser && msg.isValidUser != undefined) {
+          console.log("herer");
           logOut(function(status){
             if(status == "success") {
               console.log("logged out");
