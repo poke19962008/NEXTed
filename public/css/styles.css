@@ -12,9 +12,9 @@ p {
 .update{
   position: relative;
   font-weight: bolder;
-  top: 60px;
-  left: 440px;
-  font-size: 20px;
+  top: 100px;
+  left: 540px;
+  font-size: 15px;
   color: #FF5274;
 }
 #lives{
@@ -25,10 +25,12 @@ p {
 
 #logo{
   color: #dcdcdc;
+  position: relative;
+  top:8px;
 }
 #login{
   position: relative;
-  top: 54px;
+  top: 52px;
   left: -20px;
 }
 h1 {
