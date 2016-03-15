@@ -30,12 +30,13 @@
     }
 
     myApp.controller('ProfileCtrl',function($scope){
+      var ID = $("meta[type=student]").attr("ID");
       // Get User Profile Data
       $.ajax({
            method: "GET",
            url: "/api/public/getProfile/student",
            data: {
-             ID: "123testID"
+             ID: ID
            }
          }).done(function(msg){
            var name = encName(msg.name);
@@ -84,6 +85,7 @@
              $scope.skills = skills;
            });
 
+
            // Populate with endorser
            $("#endList").click(function(){
              var index = $(this).attr('index');
@@ -92,14 +94,18 @@
               });
            });
 
-           $("#skill_counter").click(function(){
+           // Add animation to each .myButton
+           $(".myButton").each(function(){
              moAnimate(this);
            });
+
+
+
          });
     });
 })(window.angular);
 
-  function moAnimate(item){
+function moAnimate(item){
     // var item = document.querySelector('div#skill_counter');
 
   function isIOSSafari() {

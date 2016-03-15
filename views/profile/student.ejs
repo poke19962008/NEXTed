@@ -105,7 +105,7 @@
                                 <h1 class="timeline-head">WORK</h1>
                             </li> -->
                             <li id="resume">
-                                <div class="timeline-badge warning"></div>
+                                <div class="timeline-badge primary"></div>
                                 <div class="timeline-panel">
                                     <h1>Honors and Awards</h1>
                                     <div class="hr-left"></div>
@@ -121,7 +121,7 @@
                                 </div>
                             </li>
                             <li id="resume">
-                                <div class="timeline-badge warning"></div>
+                                <div class="timeline-badge primary"></div>
                                 <div class="timeline-panel">
                                     <div class="row display:flex"><div class="col-xs-2"><h1>Qualification</h1></div><div class="col-xs-10"><a data-toggle="modal" data-target="#myModal1"><span class="glyphicon glyphicon-plus" style="float:right;font-size:30px"></span></a></div></div>
                                     <div class="hr-left"></div>
@@ -138,14 +138,14 @@
                                 </div>
                             </li>
                             <li>
-                                <div class="timeline-badge warning"></div>
+                                <div class="timeline-badge primary"></div>
                                 <div class="timeline-panel">
                                     <h1>Skills</h1>
                                     <div class="hr-left"></div>
                                      <div class="row">
 
                                       <div ng-repeat="skill in skills" id="skill_counter" class="myButton col-md-4 col-xs-12" style="margin:10px 10px 0 0;">
-	                                      <div class="col-xs-12" style="padding-right:0;" ><a data-toggle="modal" data-target="#myModal" >
+	                                      <div class="col-xs-12" style="padding-right:0;" ><a data-toggle="modal" data-target="#skillModal" >
 	                                      <span id="endList" index={{skill.index}} class="glyphicon glyphicon-option-vertical"></span></a></div>
 	                                      <h3 class="col-xs-12" style="text-align:center;margin-top:10px;">{{skill.skill}}</h3>
 	                                      <div class="col-xs-12" style="text-align:center" id="skill_counter">
@@ -168,7 +168,7 @@
     </div>
     <!-- end:main -->
      <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
+  <div class="modal fade" id="skillModal" role="dialog">
     <div class="modal-dialog">
 
       <!-- Modal content-->

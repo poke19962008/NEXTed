@@ -45,6 +45,4 @@ router.get('/student', function (req, res){
   }
 });
 
-
-
 module.exports = router;

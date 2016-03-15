@@ -50,11 +50,15 @@ $(document).ready(function(){
             var type = (toggleSwitch)?
              "teacher":
              "student";
+            var d = new Date();
+            d.setTime(d.getTime() + (1*24*60*60*1000));
+            var cookieConf = "path=/; expires="+d.toUTCString()+";";
+            document.cookie = "ID="+$("#login__username").val()+"; "+cookieConf;
+            document.cookie = "IDType="+type+"; "+cookieConf
             window.location = "../profile/"+type;
           }
         }
         else if (!msg.isValidUser && msg.isValidUser != undefined) {
-          console.log("herer");
           logOut(function(status){
             if(status == "success") {
               console.log("logged out");

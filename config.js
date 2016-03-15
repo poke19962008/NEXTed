@@ -6,7 +6,7 @@ module.exports = {
   },
 
   'session': {
-    'expiration': 360000*60*60,
+    'expiration': 1*24*60*60*1000,
     'key': 'iloveapple',
   },
 
