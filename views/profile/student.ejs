@@ -144,13 +144,17 @@
                                     <div class="hr-left"></div>
                                      <div class="row">
 
-
-                                        <div id="skill_counter" class="myButton col-md-4 col-xs-12" style="margin:10px 10px 0 0;
-                                        "><div class="col-xs-12" style="padding-right:0;" ><a data-toggle="modal" data-target="#myModal" ><span class="glyphicon glyphicon-option-vertical" style="color:white;float:right;padding-top:5px;"></span></a></div><h3 class="col-xs-12" style="text-align:center;margin-top:10px;">HTML5</h3>
-                                        <div class="col-xs-12" style="text-align:center" id="skill_counter">
-                                          <button class="icobutton icobutton--long-arrow-up"><span class="fa fa-long-arrow-up"></span><span class="icobutton__text icobutton__text--side">3</span></button>
-                                        </div>
+                                      <div ng-repeat="skill in skills" id="skill_counter" class="myButton col-md-4 col-xs-12" style="margin:10px 10px 0 0;">
+	                                      <div class="col-xs-12" style="padding-right:0;" ><a data-toggle="modal" data-target="#myModal" >
+	                                      <span id="endList" index={{skill.index}} class="glyphicon glyphicon-option-vertical"></span></a></div>
+	                                      <h3 class="col-xs-12" style="text-align:center;margin-top:10px;">{{skill.skill}}</h3>
+	                                      <div class="col-xs-12" style="text-align:center" id="skill_counter">
+	                                        <button class="icobutton icobutton--long-arrow-up">
+	                                          <span class="fa fa-long-arrow-up"></span><span class="icobutton__text icobutton__text--side">{{skill.counter}}</span>
+	                                        </button>
+	                                      </div>
                                       </div>
+
                                     </div>
                                 </div>
                             </li>
@@ -182,19 +186,9 @@
         </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>John F kennedy</td>
-
+      <tr ng-repeat="end in ends">
+        <td>{{end.name}}</td>
         <td>DPS RK PURAM</td>
-      </tr>
-      <tr>
-        <td>Mary</td>
-        <td>Ryan International, Rohini</td>
-      </tr>
-      <tr>
-        <td>July</td>
-        <td>Mordern School , Barakhamba</td>
-
       </tr>
     </tbody>
   </table></div>
@@ -257,7 +251,7 @@
     <script src="../js/jquery.easing.min.js"></script>
     <script src="../js/jquery.scrollUp.js"></script>
     <script src="../js/mo.min.js"></script>
-    <script src="../js/moConfig.js"></script>
+    <!-- <script src="../js/moConfig.js"></script> -->
     <script src="../../bower_components/angular/angular.min.js"></script>
     <script src="./js/main.js" type="text/javascript"></script>
      <!-- end:javascript -->
