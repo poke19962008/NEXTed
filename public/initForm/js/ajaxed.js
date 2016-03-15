@@ -17,36 +17,33 @@ $(document).ready(function() {
   	var skills = skillsstring.split(',');
   	var awarddate = date1.split('/');
   	var expdate = date2.split('/');
-  	var json ='{'+'"email":email,'+
-  		'"desig":designation,'+
-  		'"bio":biography,'+
-  		'"qualification": +{
-  			'"degree":degree,'+
-  			'"course":course,'+
-  			'"institute":institute'
-  		},'
-  		"experience": +'{'
-  			'"title":exptitle,'+
-  			'"description":expdescribe,'+
-  			"date":+'{'
-  				'"date":expdate[0],'+
-  				'"month":expdate[1],'+
-  				'"year":expdate[2]'
-  			+'}' 			
-  		+'}',
-  		"award":+'{'
-  			'"title":awardtitle,'+
-  			'"description":awarddescription,'+
-  			"date":+'{'
-  				'"date":awarddate[0],'+
-  				'"month":awarddate[1],'+
-  				'"year":awarddate[2]'
-  			+'}' 			
-  		+'}'
-  	+'}'
-  	var newjson = JSON.parse(json);
+  	
+  	$.ajax({
+  		url:"/api/teacher/update/email",
+  		data: {
+  			email: email
+  		},
+  		dataType: 'json',
+  		async: true,
+  		method: 'POST'
+  	})
+  	.done(function(data){
+		console.log("Yes, email worked");
+	});
 
-  	console.log(newjson);
+
+  	$.ajax({
+  		url:"/api/teacher/update/designation",
+  		data: {
+  			desig:designation
+  		},
+  		dataType: 'json',
+  		async:true,
+  		type: 'GET'
+  	})
+  	.done(function(data){
+		console.log("Yes,desig worked");
+	});  	
   });
 
 });
