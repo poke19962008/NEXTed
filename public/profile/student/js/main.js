@@ -209,3 +209,55 @@ function moAnimate(item){
       }
   });
 }
+
+$("#awardSubmit").click(function (){
+  $.ajax({
+    method: "POST",
+    url: "/api/student/update/add/award",
+    data: {
+      competition: [{
+          title: $("#award").val(),
+          description: $("#awardDescription").val(),
+          date: {
+            date: Number($("#awardDate").val()),
+            month: Number($("#awardMonth").val()),
+            year: Number($("#awardYear").val())
+          }
+        }]
+    }
+  })
+  .done(function(msg){
+    if(msg == "success"){
+      console.log("success");
+      // Refresh the page
+    }else{
+      // Toast for Inv. Format
+    }
+  });
+});
+
+$("#compSubmit").click(function (){
+  $.ajax({
+    method: "POST",
+    url: "/api/student/add/competition",
+    data: {
+      description: [{
+        title: $("#comp").val(),
+        description: $("#descriptionComp").val(),
+        date: {
+          date: $("#dateComp").val(),
+          month: $("#monthComp").val(),
+          year: $("#yearComp").val()
+        }
+      }]
+    }
+  }).
+  done(function(msg){
+    if(msg.status == "success"){
+      console.log("success");
+      // Refresh the page
+    }else{
+      // Toast for Inv. Format
+    }
+  });
+});

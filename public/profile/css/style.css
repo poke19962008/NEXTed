@@ -873,11 +873,12 @@ body{margin:40px;}
   font-size: 1.95rem;
   height: 4.8rem;
   font-weight: bolder;
-  color: #555;
+  color: whiteSmoke;
+  opacity: 0.7;
 }
 
 .updateModal input:hover {
-  color: #71BEAF;
+  opacity: 1;
 }
 
 .updateModal input::-webkit-input-placeholder {

@@ -76,8 +76,8 @@ router.post('/email', isLoggedIn, function (req, res){
 ** Internal Server Error -> { status: ise }
 ** Invalid Body Format -> { status: inv. format }
 ** Invalid Routing -> { status: inv. routing }
-** Qualf Already Exist -> { status: already exist }
-** Qualf Not Found -> { status: not found }
+** Comp Already Exist -> { status: already exist }
+** Comp Not Found -> { status: not found }
 **/
 router.post('/:id/competition', isLoggedIn, function (req, res){
   var opr = req.params.id;
