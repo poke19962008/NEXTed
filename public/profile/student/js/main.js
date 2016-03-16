@@ -278,14 +278,12 @@ $("#compSubmit").click(function (){
 $("#bioP").click(function(){
   var saveBtn = "<button class=\"saveEditBtn\" id=\"bioSaveBtn\">Save</button>";
   var height = $(this).css("height");
-  var width = $(this).css("width");
   var P = $(this).text();
 
   $(this).remove();
   $("#bioDiv").prepend("<textarea id=\"bioT\"></textarea>");
   $("#bioT").css({
     "height": height,
-    "width": width,
   });
   $("#bioT").text(P);
   $("#bioCenter").append(saveBtn);
