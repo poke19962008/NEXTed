@@ -103,8 +103,7 @@
                             <li id="resume">
                                 <div class="timeline-badge primary"></div>
                                 <div class="timeline-panel">
-                                	<div class="row display:flex"><div class="col-xs-2"><h1>Awards</h1></div><div class="col-xs-10"><a data-toggle="modal" data-target="#awardModal"><span class="glyphicon glyphicon-plus" style="float:right;font-size:30px"></span></a></div></div>
-
+                                    <h1>Awards</h1>
                                     <div class="hr-left"></div>
                                     <div ng-repeat="award in awards">
                                       <div class="work-experience">
@@ -120,7 +119,7 @@
                             <li id="resume">
                                 <div class="timeline-badge primary"></div>
                                 <div class="timeline-panel">
-                                    <div class="row display:flex"><div class="col-xs-2"><h1>Competition</h1></div><div class="col-xs-10"><a data-toggle="modal" data-target="#compModal"><span class="glyphicon glyphicon-plus" style="float:right;font-size:30px"></span></a></div></div>
+                                    <h1>Competition</h1>
                                     <div class="hr-left"></div>
 
                                     <div ng-repeat="comp in comps">
@@ -137,8 +136,9 @@
                             <li>
                             <!-- <div class="timeline-badge primary"></div> -->
                                 <div class="timeline-panel">
-                                    <h1>Skills</h1>
+                                    <h1>Skill</h1>
                                     <div class="hr-left"></div>
+
                                      <div class="row">
 
                                       <div ng-repeat="skill in skills" id="skill_counter" class="myButton col-md-4 col-xs-12" style="margin:10px 10px 0 0;">
@@ -163,133 +163,7 @@
             </div>
         </div>
     </div>
-    <!-- end:main -->
-
-
-  <!-- Endorsement User Modal -->
-  <div class="modal fade" id="skillModal" role="dialog">
-    <div class="modal-dialog">
-
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">×</button>
-          <h4>Recommends</h4>
-        </div>
-        <div class="modal-body">
-          <table class="table">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>School</th>
-        </tr>
-    </thead>
-    <tbody>
-      <tr ng-repeat="end in ends">
-        <td>{{end.name}}</td>
-        <td>DPS RK PURAM</td>
-      </tr>
-    </tbody>
-  </table></div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-danger btn-default pull-right" data-dismiss="modal">
-            <span class="glyphicon glyphicon-remove"></span> Cancel
-          </button>
-
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-    <!-- Competition Modal -->
-    <div class="modal fade" id="compModal" role="dialog">
-    	<div class="modal-dialog">
-
-	      <!-- Modal content-->
-	      <div class="modal-content updateModal">
-	        <div class="modal-header">
-	          <button type="button" class="close" data-dismiss="modal">×</button>
-	          <h4>Add Competition:</h4>
-	        </div>
-	        
-	        <form>
-		        <div class="modal-body">
-			        <div class="col-sm-12 form-group">
-			          <input class="" id="comp" name="comp" placeholder="Name" type="text" required>
-			        </div>
-			        <div class="col-sm-4 form-group">
-			          <input class="" id="dateComp" name="dateComp" placeholder="Date" type="text" required>
-			        </div>
-			        <div class="col-sm-4 form-group">
-			          <input class="" id="monthComp" name="monthComp" placeholder="Month" type="text" required>
-			        </div>
-			        <div class="col-sm-4 form-group">
-			          <input class="" id="yearComp" name="yearComp" placeholder="Year" type="text" required>
-			        </div>
-			        <div class="col-sm-12 form-group">
-			          <input class="" id="descriptionComp" name="descriptionComp" placeholder="Description" type="text" required>
-			        </div>
-		      	</div>
-		        <br>
-		        <div class="row">
-		        	<center>
-		        		<div class="col-md-12 form-group">
-				           <button  type="submit" id="compSubmit" Value="Submit">Send</button>
-				        </div>
-		        	</center> 
-		      </div>
-	        </form>
-	       </div>
-	    </div>
-	</div>
-
-    </div>
-  </div>
-</div>
-    <!-- awardModal -->
-    <div class="modal fade" id="awardModal" role="dialog">
-    	<div class="modal-dialog">
-
-	      <!-- Modal content-->
-	      <div class="modal-content updateModal">
-	        <div class="modal-header">
-	          <button type="button" class="close" data-dismiss="modal">×</button>
-	          <h4>Add Awards and Honors:</h4>
-	        </div>
-	        
-	        <form>
-		        <div class="modal-body">
-			        <div class="col-sm-12 form-group">
-			          <input class="" id="award" name="award" placeholder="Award" type="text" required>
-			        </div>
-			        <div class="col-sm-4 form-group">
-			          <input class="" id="awardDate" name="date" placeholder="Date" type="text" required>
-			        </div>
-			        <div class="col-sm-4 form-group">
-			          <input class="" id="awardMonth" name="month" placeholder="Month" type="text" required>
-			        </div>
-			        <div class="col-sm-4 form-group">
-			          <input class="" id="awardYear" name="year" placeholder="Year" type="text" required>
-			        </div>
-			        <div class="col-sm-12 form-group">
-			          <input class="" id="awardDescription" name="description" placeholder="Description" type="text" required>
-			        </div>
-		      	</div>
-		        <br>
-		        <div class="row">
-		        	<center>
-		        		<div class="col-md-12 form-group">
-				           <button  type="submit" id="awardSubmit" Value="Submit">Send</button>
-				        </div>
-		        	</center>
-			        
-		      </div>
-	        </form>
-	       </div>
-	    </div>
-	</div>
-
+    <!-- end:main --> 
   </div>
 </div>
 

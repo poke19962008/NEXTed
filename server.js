@@ -26,7 +26,7 @@ var app = express();
 
 // Routes Declaration
 var api = require("./routes/api/index.js");
-var getProfile = require("./routes/getProfile");
+var getProfile = require("./routes/renderProfile");
 
 // Session/Cookie Middlewares
 app.use(express.static(__dirname + '/public'));

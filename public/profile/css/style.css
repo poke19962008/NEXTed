@@ -822,6 +822,11 @@ footer p {
 }
 body{margin:40px;}
 
+
+/***
+  *  Custom Styling
+  */
+
  .myButton {
     background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #768d87), color-stop(1, #6c7c7c));
     background:-moz-linear-gradient(top, #768d87 5%, #6c7c7c 100%);
@@ -885,7 +890,8 @@ body{margin:40px;}
   color: #F8F8F8;
 }
 
-.updateModal button[type="submit"] {
+.updateModal button[type="submit"],
+.saveEditBtn {
   padding: 1.5rem;
   width: 19.5rem;
   background-color: #DA658C;
@@ -897,6 +903,24 @@ body{margin:40px;}
   color: #333;
 }
 
-.updateModal button[type="submit"]:hover{
+.saveEditBtn {
+  margin-top: 1rem;
+}
+
+.updateModal button[type="submit"]:hover,
+.saveEditBtn {
   background-color: #d44179;
+}
+
+#bioP:hover,
+.work-experience:hover {
+  background-color: #D7DCE9;
+  border-radius: 0.25rem;
+  -webkit-transition: background-color 0.5s;
+}
+
+#bioT {
+  border-width: medium;
+  border-radius: 0.5rem;
+  border-color: #BABEC9;
 }

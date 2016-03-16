@@ -1,0 +1,325 @@
+<html ng-app="profileApp">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta type="student" ID=<%= ID %>>
+    <title>My Profile </title>
+
+    <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../fonts/font-awesome-4.5.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/icons.css" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+
+</head>
+
+<body id="page-top" ng-controller="ProfileCtrl">
+
+    <!-- start:main -->
+    <div class="container" id="main">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+                <div id="sidebar">
+                    <div class="sosmed">
+                        <div class="text-center">
+                             <h1>nextED</h1>
+                        </div>
+                    </div>
+                    <div class="user">
+                        <div class="text-center">
+                            <img src="img/img.png" class="img-circle">
+                        </div>
+                        <div class="user-head">
+                            <h1>{{name}}</h1>
+                            <div class="hr-center"></div>
+                            <h5>DPS R.K PURAM <br><br>{{designation}}</h5>
+                        </div>
+                    </div>
+                    <div class="link-me">
+                        <div class="text-center">
+
+                        </div>
+                        <div class="hr-center"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
+                <div id="content">
+                    <!-- start:main content -->
+                    <div class="main-content">
+                        <ul class="timeline">
+                            <!-- start:profile -->
+                            <li id="id-profile">
+                                <div class="timeline-badge default"><i class="fa fa-user" data-original-title="" title=""></i></div>
+                                <h1 class="timeline-head">PROFILE</h1>
+                            </li>
+                            <li id="profile">
+                                <div class="timeline-badge primary"></div>
+                                <div class="timeline-panel">
+                                    <h1>Hello, I am <strong>{{name}}</strong></h1>
+                                    <h4>Student</h4>
+                                    <div class="hr-left"></div>
+                                    <div id="bioDiv">
+                                        <p id="bioP">{{bio}}</p>
+                                        <center id="bioCenter">
+                                            <!-- .saveEditButton goes her -->
+                                        </center>
+                                    </div>
+                                    
+                                </div>
+                            </li>
+                            <li id="personal-info">
+                                <div class="timeline-badge primary"></div>
+                                <div class="timeline-panel">
+                                    <h1>Personal Info</h1>
+                                    <div class="hr-left"></div>
+
+                                    <div class="btn-group">
+                                        <button type="button" disabled="" class="btn btn-primary">Name</button>
+                                        <button type="button" disabled="" class="btn btn-default">{{name}}</button>
+                                    </div>
+                                    <div class="btn-group">
+                                        <button type="button" disabled="" class="btn btn-primary">date of birth</button>
+                                        <button type="button" disabled="" class="btn btn-default">{{dateOfBirth}}</button>
+                                    </div>
+                                    <div class="btn-group">
+                                        <button type="button" disabled="" class="btn btn-primary">email</button>
+                                        <button type="button" disabled="" class="btn btn-default">{{email}}</button>
+                                    </div>
+                                    <div class="btn-group">
+                                        <button type="button" disabled="" class="btn btn-primary">Address</button>
+                                        <button type="button" disabled="" class="btn btn-default">{{address}}</button>
+                                    </div>
+                                    <div class="btn-group">
+                                        <button type="button" disabled="" class="btn btn-primary">Phone</button>
+                                        <button type="button" disabled="" class="btn btn-default">{{phone}}</button>
+                                    </div>
+                                    <div class="btn-group">
+                                        <button type="button" disabled="" class="btn btn-primary">Blog</button>
+                                        <button type="button" disabled="" class="btn btn-default">{{blog}}</button>
+                                    </div>
+                                </div>
+                            </li>
+                            <!-- end:profile -->
+
+
+                            <!-- start:resume -->
+                            <li id="resume">
+                                <div class="timeline-badge primary"></div>
+                                <div class="timeline-panel">
+                                	<div class="row display:flex"><div class="col-xs-2"><h1>Awards</h1></div><div class="col-xs-10"><a data-toggle="modal" data-target="#awardModal"><span class="glyphicon glyphicon-plus" style="float:right;font-size:30px"></span></a></div></div>
+
+                                    <div class="hr-left"></div>
+                                    <div ng-repeat="award in awards">
+                                      <div class="work-experience">
+                                          <h3>{{award.title}}</h3>
+                                          <small><i class="fa fa-calendar" data-original-title="" title=""></i>{{award.date}}</small>
+                                          <p>{{award.description}}</p>
+                                      </div>
+                                      <hr>
+                                    </div>
+
+                                </div>
+                            </li>
+                            <li id="resume">
+                                <div class="timeline-badge primary"></div>
+                                <div class="timeline-panel">
+                                    <div class="row display:flex"><div class="col-xs-2"><h1>Competition</h1></div><div class="col-xs-10"><a data-toggle="modal" data-target="#compModal"><span class="glyphicon glyphicon-plus" style="float:right;font-size:30px"></span></a></div></div>
+                                    <div class="hr-left"></div>
+
+                                    <div ng-repeat="comp in comps">
+                                      <div class="work-experience">
+                                          <h3>{{comp.title}}</h3>
+                                          <small><i class="fa fa-calendar" data-original-title="" title=""></i> {{comp.date}}</small>
+                                          <p>{{comp.description}}
+                                          </p>
+                                      </div>
+                                      <hr>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                            <!-- <div class="timeline-badge primary"></div> -->
+                                <div class="timeline-panel">
+                                    <div class="row display:flex"><div class="col-xs-2"><h1>Skill</h1></div><div class="col-xs-10"><a data-toggle="modal" data-target="#awardModal"><span class="glyphicon glyphicon-plus" style="float:right;font-size:30px"></span></a></div></div>
+                                    <div class="hr-left"></div>
+
+                                     <div class="row">
+
+                                      <div ng-repeat="skill in skills" id="skill_counter" class="myButton col-md-4 col-xs-12" style="margin:10px 10px 0 0;">
+	                                      <div class="col-xs-12" style="padding-right:0;" ><a data-toggle="modal" data-target="#skillModal" >
+	                                      <span id="endList" index={{skill.index}} class="glyphicon glyphicon-option-vertical"></span></a></div>
+	                                      <h3 class="col-xs-12" style="text-align:center;margin-top:10px;">{{skill.skill}}</h3>
+	                                      <div class="col-xs-12" style="text-align:center" id="skill_counter">
+	                                        <button class="icobutton icobutton--long-arrow-up">
+	                                          <span class="fa fa-long-arrow-up"></span><span class="icobutton__text icobutton__text--side">{{skill.counter}}</span>
+	                                        </button>
+	                                      </div>
+                                      </div>
+
+                                    </div>
+                                </div>
+                            </li>
+                            <!-- end:contact -->
+                        <!-- </ul> -->
+
+                    <!-- end:main content -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end:main -->
+
+
+  <!-- Endorsement User Modal -->
+  <div class="modal fade" id="skillModal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">×</button>
+          <h4>Recommends</h4>
+        </div>
+        <div class="modal-body">
+          <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>School</th>
+        </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="end in ends">
+        <td>{{end.name}}</td>
+        <td>DPS RK PURAM</td>
+      </tr>
+    </tbody>
+  </table></div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-danger btn-default pull-right" data-dismiss="modal">
+            <span class="glyphicon glyphicon-remove"></span> Cancel
+          </button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+    <!-- Competition Modal -->
+    <div class="modal fade" id="compModal" role="dialog">
+    	<div class="modal-dialog">
+
+	      <!-- Modal content-->
+	      <div class="modal-content updateModal">
+	        <div class="modal-header">
+	          <button type="button" class="close" data-dismiss="modal">×</button>
+	          <h4>Add Competition:</h4>
+	        </div>
+	        
+	        <form>
+		        <div class="modal-body">
+			        <div class="col-sm-12 form-group">
+			          <input class="" id="comp" name="comp" placeholder="Name" type="text" required>
+			        </div>
+			        <div class="col-sm-4 form-group">
+			          <input class="" id="dateComp" name="dateComp" placeholder="Date" type="text" required>
+			        </div>
+			        <div class="col-sm-4 form-group">
+			          <input class="" id="monthComp" name="monthComp" placeholder="Month" type="text" required>
+			        </div>
+			        <div class="col-sm-4 form-group">
+			          <input class="" id="yearComp" name="yearComp" placeholder="Year" type="text" required>
+			        </div>
+			        <div class="col-sm-12 form-group">
+			          <input class="" id="descriptionComp" name="descriptionComp" placeholder="Description" type="text" required>
+			        </div>
+		      	</div>
+		        <br>
+		        <div class="row">
+		        	<center>
+		        		<div class="col-md-12 form-group">
+				           <button  type="submit" id="compSubmit" Value="Submit">Send</button>
+				        </div>
+		        	</center> 
+		      </div>
+	        </form>
+	       </div>
+	    </div>
+	</div>
+
+    </div>
+  </div>
+</div>
+    <!-- awardModal -->
+    <div class="modal fade" id="awardModal" role="dialog">
+    	<div class="modal-dialog">
+
+	      <!-- Modal content-->
+	      <div class="modal-content updateModal">
+	        <div class="modal-header">
+	          <button type="button" class="close" data-dismiss="modal">×</button>
+	          <h4>Add Awards and Honors:</h4>
+	        </div>
+	        
+	        <form>
+		        <div class="modal-body">
+			        <div class="col-sm-12 form-group">
+			          <input class="" id="award" name="award" placeholder="Award" type="text" required>
+			        </div>
+			        <div class="col-sm-4 form-group">
+			          <input class="" id="awardDate" name="date" placeholder="Date" type="text" required>
+			        </div>
+			        <div class="col-sm-4 form-group">
+			          <input class="" id="awardMonth" name="month" placeholder="Month" type="text" required>
+			        </div>
+			        <div class="col-sm-4 form-group">
+			          <input class="" id="awardYear" name="year" placeholder="Year" type="text" required>
+			        </div>
+			        <div class="col-sm-12 form-group">
+			          <input class="" id="awardDescription" name="description" placeholder="Description" type="text" required>
+			        </div>
+		      	</div>
+		        <br>
+		        <div class="row">
+		        	<center>
+		        		<div class="col-md-12 form-group">
+				           <button  type="submit" id="awardSubmit" Value="Submit">Send</button>
+				        </div>
+		        	</center>
+			        
+		      </div>
+	        </form>
+	       </div>
+	    </div>
+	</div>
+
+  </div>
+</div>
+
+    <!-- start:footer -->
+    <footer>
+        <div class="container">
+            <div class="text-center">
+                <p>Copyright © 2014. All Right Severed</p>
+            </div>
+        </div>
+    </footer>
+    <!-- end:footer -->
+
+    <!-- start:javascript -->
+    <script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../js/portfolio.jquery.js"></script>
+    <script src="../js/jquery.easing.min.js"></script>
+    <script src="../js/jquery.scrollUp.js"></script>
+    <script src="../js/mo.min.js"></script>
+    <!-- <script src="../js/moConfig.js"></script> -->
+    <script src="../../bower_components/angular/angular.min.js"></script>
+    <script src="./js/main.js" type="text/javascript"></script>
+     <!-- end:javascript -->
+</body>
+
+</html>

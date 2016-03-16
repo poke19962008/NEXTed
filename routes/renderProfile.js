@@ -7,7 +7,7 @@ var router = express.Router();
 router.get('/student', function(req, res){
   if(req.session.ID == undefined || req.session.IDType != "student") res.redirect('../login');
   else{
-    res.render('profile/student', {
+    res.render('profile/student/self', {
       ID: req.session.ID
     });
   }
@@ -18,7 +18,7 @@ router.get('/student', function(req, res){
 ** <meta type="student" ID="--studentID--">
 **/
 router.get('/student/:id', function(req, res){
-  res.render('profile/student', {
+  res.render('profile/student/other', {
     ID: req.params.id
   });
 });

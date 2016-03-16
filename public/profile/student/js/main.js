@@ -1,5 +1,6 @@
 (function(angular){
     var myApp = angular.module('profileApp',[]);
+    var ID = $("meta[type=student]").attr("id");
     var months = ["January",
                   "February",
                   "March",
@@ -12,6 +13,20 @@
                   "October",
                   "November",
                   "December"];
+
+    // Get the value of cookie
+    function getCookie(cname) {
+      var name = cname + "=";
+      var ca = document.cookie.split(';');
+      for(var i=0; i<ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0)==' ') c = c.substring(1);
+          if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+      }
+      return "";
+    }
+
+
     // Method for converting date to string
     function date2str(date){
       var str=months[date.month-1]+" ";
@@ -98,8 +113,6 @@
            $(".myButton").each(function(){
              moAnimate(this);
            });
-
-
 
          });
     });
@@ -229,7 +242,7 @@ $("#awardSubmit").click(function (){
   .done(function(msg){
     if(msg == "success"){
       console.log("success");
-      // Refresh the page
+      location.reload();
     }else{
       // Toast for Inv. Format
     }
@@ -251,13 +264,45 @@ $("#compSubmit").click(function (){
         }
       }]
     }
-  }).
-  done(function(msg){
+  })
+  .done(function(msg){
     if(msg.status == "success"){
       console.log("success");
-      // Refresh the page
+      location.reload();
     }else{
       // Toast for Inv. Format
     }
+  });
+});
+
+$("#bioP").click(function(){
+  var saveBtn = "<button class=\"saveEditBtn\" id=\"bioSaveBtn\">Save</button>";
+  var height = $(this).css("height");
+  var width = $(this).css("width");
+  var P = $(this).text();
+
+  $(this).remove();
+  $("#bioDiv").prepend("<textarea id=\"bioT\"></textarea>");
+  $("#bioT").css({
+    "height": height,
+    "width": width,
+  });
+  $("#bioT").text(P);
+  $("#bioCenter").append(saveBtn);
+
+  $(".saveEditBtn").click(function(){
+    console.log("hello");
+    $.ajax({
+      method: "POST",
+      url: "/api/student/update/bio",
+      data: {
+        bio: $("#bioT").val()
+      }
+    })
+    .done(function(msg){
+      if(msg.status == "success"){
+        location.reload();
+      }
+    });
   });
 });

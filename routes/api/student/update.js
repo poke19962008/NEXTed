@@ -60,6 +60,37 @@ router.post('/email', isLoggedIn, function (req, res){
 
 
 /**
+** UPDATE BIO (POST)
+** BODY(application/json) ->
+** { bio: String }
+** RESPONSE
+** Success -> { status: success }
+** Internal Server Error -> { status: ise }
+** Inv Body Format -> { status: 'inv. format' }
+**/
+router.post('/bio', isLoggedIn, function (req, res){
+  var studentID  = req.session.ID;
+  var body = req.body;
+  var verified = true;
+
+  // Body Verification
+  if(body.bio == undefined) verified = false;
+
+  // Update Process
+  var studentDetail = new StudentDetail({
+    'studentID': studentID,
+    'bio': body.bio
+  });
+
+  if(verified)
+    studentDetail.updateBio(function(err, doc){
+      if(err) res.send({ status: 'ise' });
+      else res.send({ status: 'success' });
+    });
+  else res.send({ status: 'inv. format' });
+});
+
+/**
 ** UPDATE COMPETITION (POST)
 ** PARAMETERS -> 1) add 2) remove
 ** BODY(application/json) ->{competition: [

@@ -97,6 +97,19 @@ exports.studentDetailMethod = function(studentDetailSchema) {
   };
 
   /**
+  ** Update Bio
+  **/
+  studentDetailSchema.methods.updateBio = function(cb){
+    this.model('studentDetail').update({
+      'studentID': this.studentID
+    }, {
+      $set: {
+        'bio': this.bio
+      }
+    }, cb);
+  };
+
+  /**
   ** Update Experience
   ** 1) addExp 2) removeExp
   **/
