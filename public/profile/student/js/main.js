@@ -36,6 +36,17 @@
       return str;
     }
 
+    function str2date(str){
+      var date = {};
+      date = {
+        date: Number(str.split(" ,")[0].split(" ")[1]),
+        month: months.indexOf(str.split(" ")[0])+1,
+        year: Number(str.split(" ,")[1])
+      };
+
+      return date;
+    }
+
     // Method for proper name binding
     function encName(name){
       var str = name.fName;
@@ -114,12 +125,51 @@
              moAnimate(this);
            });
 
+
+           $(".removeObjConfirm").click(function (){
+             var parent = $(this).parent()
+                               .parent();
+              var catg = $(parent).attr("class").split(" ");
+              if(catg.indexOf("awards") != -1) catg = "award";
+              else catg = "competition";
+              var data ={};
+              data[catg] =  [{
+                title: $(parent).find("h3").text(),
+                description: $(parent).find("p").text(),
+                date: str2date($(parent).find("small").text())
+              }];
+
+              console.log(str2date($(parent).find("small").text()));
+             $("#confirmModal").modal("show");
+
+             $("#yesBtn").click(function(){
+               $.ajax({
+                 method: "POST",
+                 url: "/api/student/update/remove/"+catg,
+                 data: data
+               })
+               .done(function(msg){
+                 if(msg.status == "success"){
+                   console.log("success");
+                   $("#confirmModal").modal("hide");
+                   location.reload();
+                 }else{
+                   console.log(msg);
+                 }
+               });
+             });
+
+             $("#noBtn").click(function (){
+               console.log("failed");
+               $("#confirmModal").modal("hide");
+             });
+           });
          });
     });
 })(window.angular);
 
+// MO Animation configuration
 function moAnimate(item){
-    // var item = document.querySelector('div#skill_counter');
 
   function isIOSSafari() {
       var userAgent;
@@ -223,12 +273,13 @@ function moAnimate(item){
   });
 }
 
+// Add awards Function
 $("#awardSubmit").click(function (){
   $.ajax({
     method: "POST",
     url: "/api/student/update/add/award",
     data: {
-      competition: [{
+      award: [{
           title: $("#award").val(),
           description: $("#awardDescription").val(),
           date: {
@@ -240,7 +291,7 @@ $("#awardSubmit").click(function (){
     }
   })
   .done(function(msg){
-    if(msg == "success"){
+    if(msg.status == "success"){
       console.log("success");
       location.reload();
     }else{
@@ -275,6 +326,7 @@ $("#compSubmit").click(function (){
   });
 });
 
+// Bio Edit function
 $("#bioP").click(function(){
   var saveBtn = "<button class=\"saveEditBtn\" id=\"bioSaveBtn\">Save</button>";
   var height = $(this).css("height");
