@@ -113,11 +113,12 @@ router.post('/email', isLoggedIn, function (req, res){
   // Update Process
   var teacherDetail = new TeacherDetail({
     'teacherID': teacherID,
-    'email': body.email
+    'personalInfo.email': body.email
   });
 
   try {
     teacherDetail.updateEmail(function(err, doc){
+      console.log(doc);
       if(err) res.send({ status: 'ise' });
       else res.send({ status: 'success' });
     });
@@ -169,6 +170,44 @@ router.post('/designation', isLoggedIn, function (req, res){
 
 });
 
+
+/**
+** UPDATE BIO (POST)
+** TODO: Regex Verification of Email
+** BODY(application/json) ->
+** { bio: String }
+** RESPONSE
+** Success -> { status: success }
+** Internal Server Error -> { status: ise }
+** Inv Body Format -> { status: 'inv. format' }
+**/
+router.post('/bio', isLoggedIn, function (req, res){
+  var teacherID  = req.session.ID;
+  var body = req.body;
+  var verified = true;
+
+  // Body Verification
+  if(body.bio == undefined) verified = false;
+
+  // Update Process
+  var teacherDetail = new TeacherDetail({
+    'teacherID': teacherID,
+    'bio': body.bio
+  });
+
+  try {
+    teacherDetail.updateBio(function(err, doc){
+      if(err) res.send({ status: 'ise' });
+      else res.send({ status: 'success' });
+    });
+  } catch(e){
+    if(!verified){
+      res.send({ status: 'inv. format' });
+      res.end();
+    }
+  }
+
+});
 
 /**
 ** UPDATE QUALIFICATION (POST)

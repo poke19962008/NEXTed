@@ -28,13 +28,48 @@ router.get('/student', function (req, res){
     Student.findOne({
       studentID: id
     }, "name", function(err, doc){
-      if(err || doc == undefined) throw true;
+      if((err) || (doc == null)) throw true;
       var name = doc.name;
 
       StudentDetail.findOne({
         studentID: id
       },
       "studentID bio designation personalInfo skills competition award", function(err, doc){
+        if(err || doc == undefined) throw true;
+        doc.name = name;
+        res.send({name: name, detail: doc});
+      });
+    });
+  }catch(e){
+    res.send({status: 'inv. parmater.'})
+  }
+});
+
+/**
+** Teachers Get Profile
+** QUERY: ID
+** RESPONSE:
+** Success: bio designation personalInfo skills competition award name studentID
+** Failed
+**/
+router.get('/teacher', function (req, res){
+  var id;
+  try{
+    if(req.query.ID != undefined)
+      id = req.query.ID;
+    else throw true;
+
+    Teacher.findOne({
+      teacherID: id
+    }, "name", function(err, doc){
+      if((err) || (doc == null)) throw true;
+      var name = doc.name;
+
+      TeacherDetail.findOne({
+        teacherID: id
+      },
+      "teacherID bio designation personalInfo experience qualification award skills", function(err, doc){
+
         if(err || doc == undefined) throw true;
         doc.name = name;
         res.send({name: name, detail: doc});

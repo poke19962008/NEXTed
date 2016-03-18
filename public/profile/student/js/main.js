@@ -328,31 +328,39 @@ $("#compSubmit").click(function (){
 
 // Bio Edit function
 $("#bioP").click(function(){
-  var saveBtn = "<button class=\"saveEditBtn\" id=\"bioSaveBtn\">Save</button>";
-  var height = $(this).css("height");
-  var P = $(this).text();
-
-  $(this).remove();
-  $("#bioDiv").prepend("<textarea id=\"bioT\"></textarea>");
-  $("#bioT").css({
-    "height": height,
-  });
-  $("#bioT").text(P);
-  $("#bioCenter").append(saveBtn);
-
-  $(".saveEditBtn").click(function(){
-    console.log("hello");
-    $.ajax({
-      method: "POST",
-      url: "/api/student/update/bio",
-      data: {
-        bio: $("#bioT").val()
-      }
-    })
-    .done(function(msg){
-      if(msg.status == "success"){
-        location.reload();
-      }
+  try {
+    var self = $("meta[type=teacher]").attr("self");
+    if(self == "false") throw true;
+      
+    var saveBtn = "<button class=\"saveEditBtn\" id=\"bioSaveBtn\">Save</button>";
+    var height = $(this).css("height");
+    var P = $(this).text();
+  
+    $(this).remove();
+    $("#bioDiv").prepend("<textarea id=\"bioT\"></textarea>");
+    $("#bioT").css({
+      "height": height,
     });
-  });
+    $("#bioT").text(P);
+    $("#bioCenter").append(saveBtn);
+  
+    $(".saveEditBtn").click(function(){
+      console.log("hello");
+      $.ajax({
+        method: "POST",
+        url: "/api/student/update/bio",
+        data: {
+          bio: $("#bioT").val()
+        }
+      })
+      .done(function(msg){
+        if(msg.status == "success"){
+          location.reload();
+        }
+      });
+    });
+  }catch(e){
+    // add toastr 
+    console.log("Not authorised");
+  }
 });

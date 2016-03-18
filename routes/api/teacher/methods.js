@@ -200,7 +200,20 @@ exports.teacherDetailMethod = function (teacherDetailSchema) {
       'teacherID': this.teacherID
     }, {
       $set: {
-        'email': this.email
+        "personalInfo.email": this.personalInfo.email
+      }
+    }, cb);
+  };
+
+  /**
+  ** Update Bio
+  **/
+  teacherDetailSchema.methods.updateBio = function(cb){
+    this.model('teacherDetail').update({
+      'teacherID': this.teacherID
+    }, {
+      $set: {
+        'bio': this.bio
       }
     }, cb);
   };
