@@ -39,7 +39,7 @@ router.get('/teacher', function(req, res){
 ** Sets the meta tags
 ** <meta type="student" ID="--teacherID--">
 **/
-router.get('/student/:id', function(req, res){
+router.get('/teacher/:id', function(req, res){
   res.render('profile/teacher/other', {
     ID: req.params.id
   });
