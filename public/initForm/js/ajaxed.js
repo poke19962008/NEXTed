@@ -1,6 +1,7 @@
 $(document).ready(function() {
-  
-  $('.fs-continue').click(function(event) {
+
+  $('.fs-submit').click(function(event) {
+  	console.log('working');
     var designation = $('#q1').val();
     var biography = $('#q2').val();
     var email = $('#q3').val();
@@ -17,33 +18,36 @@ $(document).ready(function() {
   	var skills = skillsstring.split(',');
   	var awarddate = date1.split('/');
   	var expdate = date2.split('/');
-  	
-  	$.ajax({
-  		url:"/api/teacher/update/email",
-  		data: {
-  			email: email
-  		},
-  		dataType: 'json',
-  		async: true,
-  		method: 'POST'
-  	})
-  	.done(function(data){
-		console.log("Yes, email worked");
+
+  	// $.ajax({
+  	// 	url:"/api/teacher/update/email",
+  	// 	data: {
+  	// 		email: email
+  	// 	},
+  	// 	method: 'POST'
+  	// })
+  	// .done(function(data){
+  	// 	console.log(data);
+		// console.log("Yes, email worked");
+    //
+		// $.ajax({
+	  // 		url:"/api/teacher/update/designation",
+	  // 		data: {
+	  // 			desig:designation
+	  // 		},
+	  // 		type: 'POST'
+	  // 	})
+	  // 	.done(function(data){
+		// 	console.log("Yes,desig worked");
+		// });
+
 	});
 
 
-  	$.ajax({
-  		url:"/api/teacher/update/designation",
-  		data: {
-  			desig:designation
-  		},
-  		dataType: 'json',
-  		async:true,
-  		type: 'GET'
-  	})
-  	.done(function(data){
-		console.log("Yes,desig worked");
-	});  	
+
   });
+
+
+
 
 });
