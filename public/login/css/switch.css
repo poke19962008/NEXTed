@@ -1,15 +1,14 @@
 .colorful-switch {
-  position: absolute;
-  /*left: 60%;*/
-  top: 37%;
-  width: 80px;
-  height: 34.28571px;
-  margin-left: -40px;
-  margin-top: -7.14286px;
-  border-radius: 14.28571px;
-  background: #cfcfcf;
-  margin-left: 238.7px;
-}
+    position: relative;
+    /* left: 60%; */
+    top: -40px;
+    width: 80px;
+    height: 34.28571px;
+    margin-left: -40px;
+    margin-top: -7.14286px;
+    border-radius: 14.28571px;
+    background: #cfcfcf;
+    margin-left: 238.7px;}
 .colorful-switch__checkbox {
   z-index: -10;
   position: absolute;
