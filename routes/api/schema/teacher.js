@@ -6,7 +6,6 @@ var teacher = new Schema({
   schoolID: String,
   teacherID: String,
   schoolName: String,
-  bio: String,
   name: {
       fName: String,
       mName: String,
@@ -25,12 +24,23 @@ var teacher = new Schema({
 var teacherDetail = new Schema({
     teacherID: String,
     schoolID: String,
+    bio: String,
     designation: String,
     subjects: [{
         subjectCode: String,
         subName: String
     }],
-    email: String,
+    personalInfo: {
+      dateOfBirth: {
+        date: Number,
+        month: Number,
+        year: Number
+      },
+      address: String,
+      email: String,
+      blog: String,
+      phone: String
+    },
     qualification: [{
         degree: String,
         course: String,

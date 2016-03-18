@@ -3,7 +3,7 @@
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <meta type="student" ID=<%= ID %>>
+      <meta type="teacher" ID=<%= ID %>>
       <title>My Profile </title>
       <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css">
       <link rel="stylesheet" type="text/css" href="../fonts/font-awesome-4.5.0/css/font-awesome.min.css" />
@@ -125,21 +125,21 @@
                         <div class="timeline-panel">
                            <div class="row display:flex">
                               <div class="col-xs-2">
-                                 <h1>Competition</h1>
+                                 <h1>Experience</h1>
                               </div>
-                              <div class="col-xs-10"><a data-toggle="modal" data-target="#compModal"><span class="glyphicon glyphicon-plus" style="float:right;font-size:30px"></span></a></div>
+                              <div class="col-xs-10"><a data-toggle="modal" data-target="#xpModal"><span class="glyphicon glyphicon-plus" style="float:right;font-size:30px"></span></a></div>
                            </div>
                            <div class="hr-left"></div>
-                           <div ng-repeat="comp in comps">
-                              <div class="work-experience competition">
+                           <div ng-repeat="xp in xps">
+                              <div class="work-experience experience">
                                  <div class="row">
                                     <div class="col-xs-5">
-                                       <h3>{{comp.title}}</h3>
+                                       <h3>{{xp.title}}</h3>
                                     </div>
                                     <div class="col-xs-1 removeObjConfirm"><a data-toggle="modal" data-target="#removeConfirm"><span class="glyphicon glyphicon-remove" style="float:right;font-size:30px"></span></a></div>
                                  </div>
-                                 <small><i class="fa fa-calendar" data-original-title="" title=""></i>{{comp.date}}</small>
-                                 <p>{{comp.description}}</p>
+                                 <small><i class="fa fa-calendar" data-original-title="" title=""></i>{{xp.date}}</small>
+                                 <p>{{xp.description}}</p>
                               </div>
                               <hr>
                            </div>
@@ -210,38 +210,38 @@
                </div>
             </div>
          </div>
-         <!-- Competition Modal -->
-         <div class="modal fade" id="compModal" role="dialog">
+         <!-- Experience Modal -->
+         <div class="modal fade" id="xpModal" role="dialog">
             <div class="modal-dialog">
                <!-- Modal content-->
                <div class="modal-content updateModal">
                   <div class="modal-header">
                      <button type="button" class="close" data-dismiss="modal">×</button>
-                     <h4>Add Competition:</h4>
+                     <h4>Add Experience:</h4>
                   </div>
                   <form>
                      <div class="modal-body">
                         <div class="col-sm-12 form-group">
-                           <input class="" id="comp" name="comp" placeholder="Name" type="text" required>
+                           <input class="" id="xp" name="xp" placeholder="Name" type="text" required>
                         </div>
                         <div class="col-sm-4 form-group">
-                           <input class="" id="dateComp" name="dateComp" placeholder="Date" type="text" required>
+                           <input class="" id="dateXp" name="dateXp" placeholder="Date" type="text" required>
                         </div>
                         <div class="col-sm-4 form-group">
-                           <input class="" id="monthComp" name="monthComp" placeholder="Month" type="text" required>
+                           <input class="" id="monthXp" name="monthXp" placeholder="Month" type="text" required>
                         </div>
                         <div class="col-sm-4 form-group">
-                           <input class="" id="yearComp" name="yearComp" placeholder="Year" type="text" required>
+                           <input class="" id="yearXp" name="yearXp" placeholder="Year" type="text" required>
                         </div>
                         <div class="col-sm-12 form-group">
-                           <input class="" id="descriptionComp" name="descriptionComp" placeholder="Description" type="text" required>
+                           <input class="" id="descriptionXp" name="descriptionXp" placeholder="Description" type="text" required>
                         </div>
                      </div>
                      <br>
                      <div class="row">
                         <center>
                            <div class="col-md-12 form-group">
-                              <button  type="submit" id="compSubmit" Value="Submit">Send</button>
+                              <button  type="submit" id="xpSubmit" Value="Submit">Send</button>
                            </div>
                         </center>
                      </div>

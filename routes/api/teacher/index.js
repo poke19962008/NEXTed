@@ -192,19 +192,69 @@ router.get('/createDummyUser', function (req, res){
     teacherID: '123testID',
     schoolID: '123SchoolID',
     name: {
-      fName: 'Sayn',
-      mNae: 'Kr.',
+      fName: 'Sayan',
+      mName: '',
       lName: 'Das'
     },
-    classes: [{
-      class_: 'X'
-    }],
     password: '123test',
   });
 
   var teacherDetail =new TeacherDetail({
      teacherID: '123testID',
-     schoolID: '123SchoolID'
+     schoolID: '123SchoolID',
+     bio: "I am in my Junior year of college in Computer Science and Engineering and looking forward to Internships at a Company where I can work on my skills and do the tasks given to me with my skills and in the pursuit learn many things from Advisers, Seniors and Mentors. I have a strong passion to work on data which is generated all around by different sources. I have this ability to adapt and learn from new environment as quickly as possible.",
+     designation: "HOD",
+     personalInfo: {
+       dateOfBirth: {
+         date: 16,
+         month: 12,
+         year: 1996
+       },
+       address: "Qno. 69/Type IV/ Sector VA, BHEL Society",
+       email: "poke19962008@gmail.com",
+       blog: "sayandas.xyz",
+       phone: "9176046XXX"
+     },
+     skills: [{
+         skill: "C++",
+         counter: 1,
+         endorser: [{
+             name: {
+                 fName: "Sanjib",
+                 mName: "Kr.",
+                 lName: "Das"
+             },
+             timeStamp: 1234123,
+             ID: {
+               IDtype: "teacher",
+               ID: "123testID"
+             },
+             schoolID: "123test12",
+         }]
+     }],
+     qualification: [{
+       degree: "ACM ICPC",
+       course: "Provincial competitive programming contest.",
+       institute: "IIT B"
+     }],
+     award: [{
+         title: "Table Tennis Gold",
+         description: "Inter School Table Tennis competition",
+         date: {
+             date: 12,
+             month: 12,
+             year: 2013
+         }
+     }],
+     experience: [{
+         title: "Table Tennis Gold",
+         description: "Inter School Table Tennis competition",
+         date: {
+             date: 12,
+             month: 12,
+             year: 2013
+         }
+     }],
   });
 
 

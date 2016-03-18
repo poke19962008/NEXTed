@@ -1,6 +1,6 @@
 (function(angular){
     var myApp = angular.module('profileApp',[]);
-    var ID = $("meta[type=student]").attr("id");
+    var ID = $("meta[type=teacher]").attr("id");
     var months = ["January",
                   "February",
                   "March",
@@ -56,11 +56,11 @@
     }
 
     myApp.controller('ProfileCtrl',function($scope){
-      var ID = $("meta[type=student]").attr("ID");
+      var ID = $("meta[type=teacher]").attr("ID");
       // Get User Profile Data
       $.ajax({
            method: "GET",
-           url: "/api/public/getProfile/student",
+           url: "/api/public/getProfile/teacher",
            data: {
              ID: ID
            }
@@ -69,17 +69,16 @@
 
            var dob = date2str(msg.detail.personalInfo.dateOfBirth);
 
-           var designation = msg.detail.designation.class_ + "-";
-           designation += msg.detail.designation.section ;
+           var designation = msg.detail.designation;
 
            var awards = msg.detail.award;
            for (var i = 0; i < awards.length; i++) {
              awards[i].date = date2str(awards[i].date);
            }
 
-           var comps = msg.detail.competition;
-           for (var i = 0; i < comps.length; i++) {
-             comps[i].date = date2str(comps[i].date);
+           var xps = msg.detail.experience;
+           for (var i = 0; i < xps.length; i++) {
+             xps[i].date = date2str(xps[i].date);
            }
 
            var skills = msg.detail.skills;
@@ -107,7 +106,7 @@
              $scope.bio = bio;
              $scope.designation = designation;
              $scope.awards = awards;
-             $scope.comps = comps;
+             $scope.xps = xps;
              $scope.skills = skills;
            });
 
@@ -131,7 +130,7 @@
                                .parent();
               var catg = $(parent).attr("class").split(" ");
               if(catg.indexOf("awards") != -1) catg = "award";
-              else catg = "competition";
+              else catg = "experience";
               var data ={};
               data[catg] =  [{
                 title: $(parent).find("h3").text(),
@@ -139,13 +138,13 @@
                 date: str2date($(parent).find("small").text())
               }];
 
-              console.log(str2date($(parent).find("small").text()));
              $("#confirmModal").modal("show");
 
+            //  console.log(data);
              $("#yesBtn").click(function(){
                $.ajax({
                  method: "POST",
-                 url: "/api/student/update/remove/"+catg,
+                 url: "/api/teacher/update/remove/"+catg,
                  data: data
                })
                .done(function(msg){
@@ -277,7 +276,7 @@ function moAnimate(item){
 $("#awardSubmit").click(function (){
   $.ajax({
     method: "POST",
-    url: "/api/student/update/add/award",
+    url: "/api/teacher/update/add/award",
     data: {
       award: [{
           title: $("#award").val(),
@@ -300,18 +299,19 @@ $("#awardSubmit").click(function (){
   });
 });
 
-$("#compSubmit").click(function (){
+// Update Qualification
+$("#xpSubmit").click(function (){
   $.ajax({
     method: "POST",
-    url: "/api/student/add/competition",
+    url: "/api/teacher/update/add/experience",
     data: {
-      description: [{
-        title: $("#comp").val(),
-        description: $("#descriptionComp").val(),
+      experience: [{
+        title: $("#xp").val(),
+        description: $("#descriptionXp").val(),
         date: {
-          date: $("#dateComp").val(),
-          month: $("#monthComp").val(),
-          year: $("#yearComp").val()
+          date: $("#dateXp").val(),
+          month: $("#monthXp").val(),
+          year: $("#yearXp").val()
         }
       }]
     }
@@ -326,7 +326,7 @@ $("#compSubmit").click(function (){
   });
 });
 
-// Bio Edit function
+// // Bio Edit function
 $("#bioP").click(function(){
   var saveBtn = "<button class=\"saveEditBtn\" id=\"bioSaveBtn\">Save</button>";
   var height = $(this).css("height");
@@ -344,7 +344,7 @@ $("#bioP").click(function(){
     console.log("hello");
     $.ajax({
       method: "POST",
-      url: "/api/student/update/bio",
+      url: "/api/teacher/update/bio",
       data: {
         bio: $("#bioT").val()
       }
