@@ -361,7 +361,7 @@ $("#bioP").click(function(){
       });
     });
   } catch(e){
-    // add toastr
+    // add toastr8
     console.log("Not authorised");
   }
 });

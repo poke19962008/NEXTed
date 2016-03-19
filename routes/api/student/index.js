@@ -3,6 +3,7 @@
 ** Author: SAYAN DAS
 **/
 
+// Child Routers
 var updateRouter = require('./update');
 
 // Student & StudentDetail models
@@ -138,6 +139,17 @@ router.get('/endorse', isLogedIn, function(req, res){
 
 });
 
+
+/**
+** GET COMPETITION
+**/
+router.get('/getCompetition', isLogedIn, function(req, res){
+  try{
+
+  }catch(e){
+    res.send({ status: "failed" });
+  }
+});
 
 /**
 ** UPDATE

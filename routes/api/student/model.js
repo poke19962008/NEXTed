@@ -1,5 +1,6 @@
 /**
 ** Model Formation of Student & StudentDetail: model.js
+** ( Schema -> Methods) -> Model
 ** Author: SAYAN DAS
 **/
 
