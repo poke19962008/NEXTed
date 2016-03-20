@@ -123,6 +123,31 @@
                         <div class="timeline-panel">
                            <div class="row display:flex">
                               <div class="col-xs-2">
+                                 <h1>Qualifications</h1>
+                              </div>
+                              <div class="col-xs-10" ><a data-toggle="modal" data-target="#qualfModal" ><span class="glyphicon glyphicon-plus" style="float:right;font-size:30px"></span></a></div>
+                           </div>
+                           <div class="hr-left"></div>
+                           <div ng-repeat="qualf in qualfs">
+                              <div class="work-experience qualf">
+                                 <div class="row">
+                                    <div class="col-xs-5">
+                                       <h3>{{qualf.degree}}</h3>
+                                    </div>
+                                    <div class="col-xs-1 removeObjConfirm"><a ><span class="glyphicon glyphicon-remove" style="float:right;font-size:30px"></span></a></div>
+                                 </div>
+                                 <small><i class="fa fa-calendar" data-original-title="" title=""></i>{{qualf.course}}</small>
+                                 <p>{{qualf.institute}}</p>
+                              </div>
+                              <hr>
+                           </div>
+                        </div>
+                     </li>
+                     <li id="resume">
+                        <div class="timeline-badge primary"></div>
+                        <div class="timeline-panel">
+                           <div class="row display:flex">
+                              <div class="col-xs-2">
                                  <h1>Experience</h1>
                               </div>
                            </div>
