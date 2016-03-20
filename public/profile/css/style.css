@@ -776,7 +776,7 @@ footer p {
 }
 
 .top-nav-collapse {
-    /* Customize the look and feel of the collapsed top nav here */
+    
     padding: 0;
     background-color: #08c;
     border-bottom: 1px scroller #ccc;
@@ -822,9 +822,7 @@ footer p {
 }
 
 
-/***
-  *  Custom Styling
-  */
+
 
  .myButton {
     background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #768d87), color-stop(1, #6c7c7c));
@@ -967,3 +965,8 @@ footer p {
   font-family: "Open Sans", sans-serif;
   font-weight: 400;
 }
+
+
+
+
+
