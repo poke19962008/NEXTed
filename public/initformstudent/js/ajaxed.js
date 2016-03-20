@@ -6,12 +6,9 @@ $(document).ready(function(){
     e.preventDefault();
 
 
-    var designation = $('#q1').val();
+    
     var biography = $('#q2').val();
     var email = $('#q3').val();
-    var qdegree = $('#q4').val();
-    var qcourse = $('#q5').val();
-    var qinstitute = $('#q6').val();
     var awardtitle =$('#q7').val();
     var date1 =$('#q8').val();
   	var awarddescription =$('#q9').val();
@@ -22,11 +19,11 @@ $(document).ready(function(){
   	var skills = skillsstring.split(',');
   	var awarddate = date1.split('/');
   	var expdate = date2.split('/');
-  console.log(skills);
-
+  console.log(email);
+ 
 
     var exp = {
-                experience: [
+                competition: [
                   {
                     title: exptitle,
                     description: expdescribe,
@@ -34,20 +31,12 @@ $(document).ready(function(){
                       date: expdate[0],
                       month:expdate[1],
                       year:expdate[2]
-                    }
+                    } 
                   }
                 ]
               }
 
-    var qual = {
-                  qualification: [
-                    {
-                      degree: qdegree,
-                      course: qcourse,
-                      institute: qinstitute
-                    }
-                  ]
-              }
+   
     var award = {
                 award: [
                   {
@@ -61,9 +50,10 @@ $(document).ready(function(){
                   }
                 ]
               }
+
     var skill = {
-                            skill:[skills]
-                }
+                skill:[skills]
+    }          
 /*
 UPDATE EMAIL
 *
@@ -74,7 +64,7 @@ UPDATE EMAIL
 */
   $.ajax({
     method: "POST",
-    url: "/api/teacher/update/email",
+    url: "/api/student/update/email",
     data: { email:email }
     })
     .done(function( msg ) {
@@ -84,24 +74,7 @@ UPDATE EMAIL
     alert( "error" );
   });
 
-/*Update designation
-*
-*
-*
-*
-*
-*/
-  $.ajax({
-    method:"POST",
-    url:"/api/teacher/update/designation",
-    data:{ desig:designation}
-  })
-  .done(function(msg){
-    console.log(msg);
-  })
-  .fail(function(){
-    console.log("fail desig: ");
-  });
+
 
 /*Update biography
 *
@@ -112,7 +85,7 @@ UPDATE EMAIL
 */
   $.ajax({
     method:"POST",
-    url:"/api/teacher/update/bio",
+    url:"/api/student/update/bio",
     data:{bio:biography}
   })
   .done(function(msg){
@@ -122,26 +95,8 @@ UPDATE EMAIL
     console.log("fail bio : ");
   });
 
-/*update qualification
-*
-*
-*
-*
-*
-*/
-  $.ajax({
-    method:"POST",
-    url:"/api/teacher/update/add/qualification",
-      data:qual,
-  })
-  .done(function(msg){
-    console.log(msg);
-  })
-  .fail(function(){
-    console.log("fail qualification")
-  });
 
-/*update experience
+/*update experience/Competition
 *
 *
 *
@@ -150,14 +105,14 @@ UPDATE EMAIL
 */
   $.ajax({
     method:"POST",
-    url:"/api/teacher/update/add/experience",
+    url:"/api/student/update/add/competition",
       data :exp,
 })
   .done(function(msg){
     console.log(msg);
   })
   .fail(function(msg){
-      console.log("experience fails");
+      console.log("competition fails");
   })
 /**
 update award
@@ -170,7 +125,7 @@ update award
 
   $.ajax({
       method:"POST",
-      url:"/api/teacher/update/add/award",
+      url:"/api/student/update/add/award",
       data: award,
   })
   .done(function(msg){
@@ -179,25 +134,31 @@ update award
   .fail(function(msg){
     console.log(msg);
   })
+ 
 
-/**
+ /**
 Update skills
 *
+*
+*
+**
 *
 *
 *
 */
 $.ajax({
   method:"POST",
-  url:"/api/teacher/addSkill",
+  url:"/api/student/addSkill",
   data: skill,
 })
 .done(function(msg){
   console.log("Skill requesting"+msg);
 })
 .fail(function(msg){
-  console.log("Skill error "+ msg);
+  console.log("Skill error"+msg);
 })
+
+
 
 
 

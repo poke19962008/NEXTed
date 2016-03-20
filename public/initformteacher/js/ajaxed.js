@@ -22,8 +22,8 @@ $(document).ready(function(){
   	var skills = skillsstring.split(',');
   	var awarddate = date1.split('/');
   	var expdate = date2.split('/');
-  console.log(skills);
-
+  console.log(email);
+  console.log(designation);
 
     var exp = {
                 experience: [
@@ -62,8 +62,9 @@ $(document).ready(function(){
                 ]
               }
     var skill = {
-                            skill:[skills]
-                }
+                       skill:[skills]
+           }
+
 /*
 UPDATE EMAIL
 *
@@ -168,6 +169,9 @@ update award
 *
 */
 
+
+
+
   $.ajax({
       method:"POST",
       url:"/api/teacher/update/add/award",
@@ -179,25 +183,26 @@ update award
   .fail(function(msg){
     console.log(msg);
   })
-
-/**
-Update skills
+/*
 *
-*
+* Update skills
 *
 *
 */
+
 $.ajax({
   method:"POST",
   url:"/api/teacher/addSkill",
   data: skill,
 })
 .done(function(msg){
-  console.log("Skill requesting"+msg);
+  console.log(msg);
 })
 .fail(function(msg){
-  console.log("Skill error "+ msg);
+  console.log(msg);
 })
+
+
 
 
 
