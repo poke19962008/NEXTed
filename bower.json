@@ -1,0 +1,21 @@
+{
+  "name": "EduFix",
+  "description": "Start up project to improve educational system",
+  "main": "server.js",
+  "authors": [
+    "Sayan Das <poke19962008@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "node"
+  ],
+  "homepage": "https://github.com/poke19962008/EduFix",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
