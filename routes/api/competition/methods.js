@@ -13,7 +13,7 @@ exports.competitionMethod = function(competitionSchema){
       reqSkills: {
         $in: skills
       }
-    },"name description schoolName regDate", cb);
+    },"name description schoolName regDate venue", cb);
   }
 
   return competitionSchema;

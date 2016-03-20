@@ -7,6 +7,7 @@ var competition = new Schema({
   description: String,
   schoolID: String,
   schoolName: String,
+  venue: String,
   regDate: {
     date: Number,
     month: Number,
