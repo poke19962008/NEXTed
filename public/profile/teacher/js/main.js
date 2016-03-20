@@ -70,6 +70,7 @@
            var dob = date2str(msg.detail.personalInfo.dateOfBirth);
 
            var designation = msg.detail.designation;
+           var qualf = msg.detail.qualification;
 
            var awards = msg.detail.award;
            for (var i = 0; i < awards.length; i++) {
@@ -108,6 +109,7 @@
              $scope.awards = awards;
              $scope.xps = xps;
              $scope.skills = skills;
+             $scope.qualfs = qualf;
            });
 
 
@@ -124,44 +126,54 @@
              moAnimate(this);
            });
 
-
+           // Remove Award and Experience
            $(".removeObjConfirm").click(function (){
              var parent = $(this).parent()
                                .parent();
               var catg = $(parent).attr("class").split(" ");
               if(catg.indexOf("awards") != -1) catg = "award";
-              else catg = "experience";
+              else if(catg.indexOf("experience") != -1) catg = "experience";
+              else catg = "qualification";
+
               var data ={};
-              data[catg] =  [{
-                title: $(parent).find("h3").text(),
-                description: $(parent).find("p").text(),
-                date: str2date($(parent).find("small").text())
-              }];
 
-             $("#confirmModal").modal("show");
+              if(catg == "qualification"){
+                data[catg] = [{
+                  degree: $(parent).find("h3").text(),
+                  institute: $(parent).find("p").text(),
+                  course: $(parent).find("small").text()
+                }];
+              }else{
+                data[catg] =  [{
+                  title: $(parent).find("h3").text(),
+                  description: $(parent).find("p").text(),
+                  date: str2date($(parent).find("small").text())
+                }];
+              }
 
-            //  console.log(data);
-             $("#yesBtn").click(function(){
-               $.ajax({
-                 method: "POST",
-                 url: "/api/teacher/update/remove/"+catg,
-                 data: data
-               })
-               .done(function(msg){
-                 if(msg.status == "success"){
-                   console.log("success");
-                   $("#confirmModal").modal("hide");
-                   location.reload();
-                 }else{
-                   console.log(msg);
-                 }
-               });
-             });
+              $("#confirmModal").modal("show");
 
-             $("#noBtn").click(function (){
-               console.log("failed");
-               $("#confirmModal").modal("hide");
-             });
+              $("#yesBtn").click(function(){
+                $.ajax({
+                  method: "POST",
+                  url: "/api/teacher/update/remove/"+catg,
+                  data: data
+                })
+                .done(function(msg){
+                  if(msg.status == "success"){
+                    console.log("success");
+                    $("#confirmModal").modal("hide");
+                    location.reload();
+                  }else{
+                    console.log(msg);
+                  }
+                });
+              });
+
+              $("#noBtn").click(function (){
+                console.log("failed");
+                $("#confirmModal").modal("hide");
+              });
            });
 
          });
@@ -300,7 +312,7 @@ $("#awardSubmit").click(function (){
   });
 });
 
-// Update Qualification
+// Update Experience
 $("#xpSubmit").click(function (){
   $.ajax({
     method: "POST",
@@ -314,6 +326,37 @@ $("#xpSubmit").click(function (){
           month: $("#monthXp").val(),
           year: $("#yearXp").val()
         }
+      }]
+    }
+  })
+  .done(function(msg){
+    if(msg.status == "success"){
+      console.log("success");
+      location.reload();
+    }else{
+      // Toast for Inv. Format
+    }
+  });
+});
+
+//Update Qualification
+$("#qualfSubmit").click(function(){
+  var degree = $("#degreeQualf").val();
+  var course = $("#courseQualf").val();
+  var institute = $("#instituteQualf").val();
+
+  console.log(degree);
+  console.log(course);
+  console.log(institute);
+
+  $.ajax({
+    method: "POST",
+    url: "/api/teacher/update/add/qualification",
+    data: {
+      qualification: [{
+        degree: degree,
+        course: course,
+        institute: institute
       }]
     }
   })

@@ -125,6 +125,31 @@
                         <div class="timeline-panel">
                            <div class="row display:flex">
                               <div class="col-xs-2">
+                                 <h1>Qualifications</h1>
+                              </div>
+                              <div class="col-xs-10" ><a data-toggle="modal" data-target="#qualfModal" ><span class="glyphicon glyphicon-plus" style="float:right;font-size:30px"></span></a></div>
+                           </div>
+                           <div class="hr-left"></div>
+                           <div ng-repeat="qualf in qualfs">
+                              <div class="work-experience qualf">
+                                 <div class="row">
+                                    <div class="col-xs-5">
+                                       <h3>{{qualf.degree}}</h3>
+                                    </div>
+                                    <div class="col-xs-1 removeObjConfirm"><a ><span class="glyphicon glyphicon-remove" style="float:right;font-size:30px"></span></a></div>
+                                 </div>
+                                 <small><i class="fa fa-calendar" data-original-title="" title=""></i>{{qualf.course}}</small>
+                                 <p>{{qualf.institute}}</p>
+                              </div>
+                              <hr>
+                           </div>
+                        </div>
+                     </li>
+                     <li id="resume">
+                        <div class="timeline-badge primary"></div>
+                        <div class="timeline-panel">
+                           <div class="row display:flex">
+                              <div class="col-xs-2">
                                  <h1>Experience</h1>
                               </div>
                               <div class="col-xs-10"><a data-toggle="modal" data-target="#xpModal"><span class="glyphicon glyphicon-plus" style="float:right;font-size:30px"></span></a></div>
@@ -309,6 +334,39 @@
                             <center><button type="submit" id="noBtn">No</button></center>
                          </div>
                      </div>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+      <!-- Qualification Modal -->
+      <div class="modal fade" id="qualfModal" role="dialog">
+         <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content updateModal">
+               <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">×</button>
+                  <h4>Add Qualification:</h4>
+               </div>
+               <form>
+                  <div class="modal-body">
+                     <div class="col-sm-12 form-group">
+                        <input class="" id="degreeQualf" name="degree" placeholder="Degree" type="text" required>
+                     </div>
+                     <div class="col-sm-12 form-group">
+                        <input class="" id="courseQualf" name="course" placeholder="Course" type="text" required>
+                     </div>
+                     <div class="col-sm-12 form-group">
+                        <input class="" id="instituteQualf" name="institute" placeholder="Institute" type="text" required>
+                     </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                     <center>
+                        <div class="col-md-12 form-group">
+                           <button  type="submit" id="qualfSubmit" Value="Submit">Send</button>
+                        </div>
+                     </center>
                   </div>
                </form>
             </div>
