@@ -93,7 +93,7 @@ exports.studentDetailMethod = function(studentDetailSchema) {
       'studentID': this.studentID
     }, {
       $set: {
-        'email': this.email
+        'personalInfo.email': this.personalInfo.email
       }
     }, cb);
   };

@@ -47,7 +47,7 @@ router.post('/email', isLoggedIn, function (req, res){
   // Update Process
   var studentDetail = new StudentDetail({
     'studentID': studentID,
-    'email': body.email
+    'personalInfo.email': body.email
   });
 
   if(verified)
