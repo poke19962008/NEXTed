@@ -4,6 +4,7 @@ var Schema = mongoose.Schema;
 
 var competition = new Schema({
   name: String,
+  description: String,
   schoolID: String,
   schoolName: String,
   regDate: {
@@ -11,9 +12,7 @@ var competition = new Schema({
     month: Number,
     year: Number
   },
-  reqSkills: [{
-    skill: String
-  }],
+  reqSkills: [String],
   participants: [{
     studentID: String,
     timestamp: Number

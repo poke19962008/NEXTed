@@ -3,6 +3,8 @@
 ** Author: SAYAN DAS
 **/
 
+// External Models
+var Competition = require('../competition/model').competition;
 
 exports.studentMethod = function(studentSchema) {
 
@@ -210,6 +212,24 @@ exports.studentDetailMethod = function(studentDetailSchema) {
           }
         }, cb);
       }else cb("not found", "");
+    });
+  };
+
+  /**
+  ** Get All Related Competition
+  **/
+  studentDetailSchema.methods.getRelatedComp = function(cb){
+    var comp = new Competition();
+
+    this.model('studentDetail').findOne({
+      studentID: this.studentID,
+    }, "skills.skill", function(err, doc){
+      if(err) cb(err, "");
+      else {
+        doc = doc.skills;
+        for (var i = 0; i < doc.length; i++) doc[i] = doc[i].skill;
+        comp.getCompetition(doc, cb);
+      }
     });
   };
 

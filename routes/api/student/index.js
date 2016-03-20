@@ -9,6 +9,7 @@ var updateRouter = require('./update');
 // Student & StudentDetail models
 var Student = require('./model').student;
 var StudentDetail = require('./model').studentDetail;
+var Competition = require('../competition/model').competition;
 
 var express = require('express');
 var router = express.Router();
@@ -145,9 +146,16 @@ router.get('/endorse', isLogedIn, function(req, res){
 **/
 router.get('/getCompetition', isLogedIn, function(req, res){
   try{
+    var studentDet = new StudentDetail({
+      studentID: req.session.ID
+    });
 
+    studentDet.getRelatedComp(function(err, doc){
+      if(err) throw true;
+      else res.send(doc);
+    });
   }catch(e){
-    res.send({ status: "failed" });
+    res.send({ status: "failed"})
   }
 });
 
