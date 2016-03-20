@@ -776,7 +776,7 @@ footer p {
 }
 
 .top-nav-collapse {
-    
+
     padding: 0;
     background-color: #08c;
     border-bottom: 1px scroller #ccc;
@@ -966,7 +966,54 @@ footer p {
   font-weight: 400;
 }
 
+.sugCmptDiv {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
 
+.sugCmptDiv .header {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.9rem;
+  margin: 1rem 0 1rem 0;
+  font-family: "Open Sans", sans-serif;
+}
 
+.sugCmpt {
+  width: 100%;
+  background-color: #82CDBD;
+  border-radius: 0.6rem;
+  overflow: auto;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  opacity: 0.85;
+  -webkit-transition: opacity 1s;
+  margin: 0.5rem 0 0.5rem 0;
+}
 
+.sugCmpt:hover{
+  opacity: 1;
+  -webkit-transition: opacity 1s;
+}
 
+.sugCmpt div{
+  margin: 3px 1px 3px 1px;
+}
+
+.sugCmpt .content {
+  text-align: center;
+  overflow: hidden;
+}
+
+.sugCmpt .content .title{
+  min-height: 3.2rem;
+  font-size: 1.7rem;
+  font-weight: bold;
+  color: #374A5D;
+  cursor: hand;
+}
+
+.sugCmpt .content .school {
+  font-weight: lighter;
+  font-size: 1.55rem;
+}

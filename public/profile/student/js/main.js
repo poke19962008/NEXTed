@@ -1,6 +1,8 @@
 (function(angular){
     var myApp = angular.module('profileApp',[]);
     var ID = $("meta[type=student]").attr("id");
+    var self = $("meta[type=student]").attr("self");
+    self = (self == "true")? true: false;
     var months = ["January",
                   "February",
                   "March",
@@ -110,6 +112,19 @@
              $scope.comps = comps;
              $scope.skills = skills;
            });
+
+
+           if(self){
+             $.ajax({
+               method: "GET",
+               url: "/api/student/getCompetition",
+             })
+             .done(function(msg){
+               $scope.$apply(function(){
+                 $scope.sugCmpts = msg;
+               });
+             });
+           }
 
 
            // Populate with endorser
@@ -331,11 +346,11 @@ $("#bioP").click(function(){
   try {
     var self = $("meta[type=teacher]").attr("self");
     if(self == "false") throw true;
-      
+
     var saveBtn = "<button class=\"saveEditBtn\" id=\"bioSaveBtn\">Save</button>";
     var height = $(this).css("height");
     var P = $(this).text();
-  
+
     $(this).remove();
     $("#bioDiv").prepend("<textarea id=\"bioT\"></textarea>");
     $("#bioT").css({
@@ -343,7 +358,7 @@ $("#bioP").click(function(){
     });
     $("#bioT").text(P);
     $("#bioCenter").append(saveBtn);
-  
+
     $(".saveEditBtn").click(function(){
       console.log("hello");
       $.ajax({
@@ -360,7 +375,7 @@ $("#bioP").click(function(){
       });
     });
   }catch(e){
-    // add toastr 
+    // add toastr
     console.log("Not authorised");
   }
 });
