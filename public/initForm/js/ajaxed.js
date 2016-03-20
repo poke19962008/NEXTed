@@ -4,7 +4,7 @@ $(document).ready(function(){
   $('#submitt').on('click',function(e) {
 
     e.preventDefault();
-    e.stopPropagation(); // only neccessary if something above is listening to the (default-)event too
+
 
     var designation = $('#q1').val();
     var biography = $('#q2').val();
@@ -22,74 +22,177 @@ $(document).ready(function(){
   	var skills = skillsstring.split(',');
   	var awarddate = date1.split('/');
   	var expdate = date2.split('/');
-    console.log("Hello");
-  //
-  	$.ajax({
-  		url:"/api/teacher/update/email",
-      type:'POST',
-      data: {
-  			email: email
-  		},
-  		success: function(data){
-        console.log("first ajax done");
+  console.log(email);
+  console.log(designation);
 
-    		$.ajax({
-    	  		url:"/api/teacher/update/designation",
-            type:'POST',
-            data: {
-    	  			desig:designation
-    	  		},
-            success: function(data){
-              console.log("second ajax done");
+    var exp = {
+                experience: [
+                  {
+                    title: exptitle,
+                    description: expdescribe,
+                    date: {
+                      date: expdate[0],
+                      month:expdate[1],
+                      year:expdate[2]
+                    }
+                  }
+                ]
+              }
 
-              $.ajax({
-                url:"/api/teacher/update/bio",
-                type:'POST',
-                data: {
-                  bio:biography
-                },
-                success: function(data){
-                  console.log("third ajax done");
-                  $.ajax({
-                    url:"/api/teacher/update"
-                  })
-                }
-              })
-            }
+    var qual = {
+                  qualification: [
+                    {
+                      degree: qdegree,
+                      course: qcourse,
+                      institute: qinstitute
+                    }
+                  ]
+              }
+    var award = {
+                award: [
+                  {
+                    title: awardtitle,
+                    description: awarddescription,
+                    date: {
+                      date: awarddate[0],
+                      month:awarddate[1],
+                      year:awarddate[2]
+                    }
+                  }
+                ]
+              }
 
-    	  	})
-
-
-      },
-      error: function(err){
-        console.log("The error is "+ err);
-      },
-      complete: function(){
-        console.log("All requests completed");
-      }
-  	})
-
-
-	});
-
-
-
-
-  /*
+/*
+UPDATE EMAIL
+*
+*
+*
+*
+*
+*/
   $.ajax({
-  type:"POST",
-  dataType:'json',
-  url:"/js/..",
-  data:{email:email},
-  success:function(data){
+    method: "POST",
+    url: "/api/teacher/update/email",
+    data: { email:email }
+    })
+    .done(function( msg ) {
+      console.log(msg);
+    })
+    .fail(function() {
+    alert( "error" );
+  });
 
-  },
-  complete:function(){}
-});
-  */
+/*Update designation
+*
+*
+*
+*
+*
+*/
+  $.ajax({
+    method:"POST",
+    url:"/api/teacher/update/designation",
+    data:{ desig:designation}
+  })
+  .done(function(msg){
+    console.log(msg);
+  })
+  .fail(function(){
+    console.log("fail desig: ");
+  });
+
+/*Update biography
+*
+*
+*
+*
+*
+*/
+  $.ajax({
+    method:"POST",
+    url:"/api/teacher/update/bio",
+    data:{bio:biography}
+  })
+  .done(function(msg){
+    console.log(msg);
+  })
+  .fail(function(){
+    console.log("fail bio : ");
+  });
+
+/*update qualification
+*
+*
+*
+*
+*
+*/
+  $.ajax({
+    method:"POST",
+    url:"/api/teacher/update/add/qualification",
+      data:qual,
+  })
+  .done(function(msg){
+    console.log(msg);
+  })
+  .fail(function(){
+    console.log("fail qualification")
+  });
+
+/*update experience
+*
+*
+*
+*
+*
+*/
+  $.ajax({
+    method:"POST",
+    url:"/api/teacher/update/add/experience",
+      data :exp,
+})
+  .done(function(msg){
+    console.log(msg);
+  })
+  .fail(function(msg){
+      console.log("experience fails");
+  })
+/**
+update award
+*
+*
+*
+*
+*
+*/
+
+
+
+
+  $.ajax({
+      method:"POST",
+      url:"/api/teacher/update/add/award",
+      data: award,
+  })
+  .done(function(msg){
+      console.log(msg);
+  })
+  .fail(function(msg){
+    console.log(msg);
+  })
+
+
+
+
+
+
+
+
+
+
   });
 
 
 
-  //
-  //
+
+  });
