@@ -866,7 +866,8 @@ footer p {
   color:white;float:right;padding-top:5px;
 }
 
-.updateModal input {
+.updateModal input,
+.updateModal .addSkill {
   background-color: #64DBC5;
   padding: 1rem;
   border: 0;
@@ -878,10 +879,12 @@ footer p {
   font-weight: bolder;
   color: whiteSmoke;
   opacity: 0.7;
+  -webkit-transition:opacity 1s;
 }
 
 .updateModal input:hover {
   opacity: 1;
+  -webkit-transition:opacity 1s;
 }
 
 .updateModal input::-webkit-input-placeholder {
@@ -1016,4 +1019,21 @@ footer p {
 .sugCmpt .content .school {
   font-weight: lighter;
   font-size: 1.55rem;
+}
+
+#addSkillModal .updateModal .addSkillRow {
+  margin-top: 10px;
+  padding-left: 29px;
+  padding-right: 29px;
+}
+
+#addSkillModal .updateModal .addSkill {
+  border: 0.3rem;
+  border-style: dashed;
+  background-color: #76A69E;
+  cursor: hand;
+}
+
+#addSkillModal .skillEdit input {
+  margin: 0.68rem 0 0.68rem 0;
 }

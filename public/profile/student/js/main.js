@@ -379,3 +379,28 @@ $("#bioP").click(function(){
     console.log("Not authorised");
   }
 });
+
+$("#addSkillModal .updateModal .addSkill").click(function(){
+  var skillDiv = "<input class=\"\" id=\"addSkill\" name=\"skill\" placeholder=\"Skill\" type=\"text\" required>";
+  $("#addSkillModal .skillEdit").append(skillDiv);
+});
+
+$("#addSkillModal #saveBtn").click(function(){
+  $("#addSkillModal .skillEdit input").each(function(){
+    $.ajax({
+      method: "POST",
+      url: "/api/student/addSkill",
+      data: {
+        skill: $(this).val()
+      }
+    })
+    .done(function(msg){
+      if(msg.status == "success")
+        location.reload();
+      else{
+        // toastr error message
+        console.log("Cannot add skill");
+      }
+    });
+  });
+});
