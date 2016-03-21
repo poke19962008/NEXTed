@@ -18,17 +18,17 @@ router.get('/', function(req, res){
 
 router.get('/addDummyComp', function(req, res){
  var comp = new Competition({
-   name: "ICPC",
-   description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum",
+   name: "Behes",
+   description: "Dummy",
    schoolID: "123testSchool",
-   schoolName: "DPS Hwr.",
+   schoolName: "DPS Noida.",
    venue: "Apple Lab",
    regDate: {
      date: 12,
-     month: 12,
-     year: 1996
+     month: 11,
+     year: 2012
    },
-   reqSkills: ["C++"]
+   reqSkills: ["Debate"]
  });
 
  comp.save(function(err){

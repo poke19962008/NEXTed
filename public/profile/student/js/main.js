@@ -179,6 +179,32 @@
                $("#confirmModal").modal("hide");
              });
            });
+
+           $("#compSubmit").click(function (){
+             $.ajax({
+               method: "POST",
+               url: "/api/student/update/add/competition",
+               data: {
+                 competition: [{
+                   title: $("#comp").val(),
+                   description: $("#descriptionComp").val(),
+                   date: {
+                     date: Number($("#dateComp").val()),
+                     month: Number($("#monthComp").val()),
+                     year: Number($("#yearComp").val())
+                   }
+                 }]
+               }
+             })
+             .done(function(msg){
+               if(msg.status == "success"){
+                 console.log("success");
+                 location.reload();
+               }else{
+                 // Toast for Inv. Format
+               }
+             });
+           });
          });
     });
 })(window.angular);
@@ -303,32 +329,6 @@ $("#awardSubmit").click(function (){
             year: Number($("#awardYear").val())
           }
         }]
-    }
-  })
-  .done(function(msg){
-    if(msg.status == "success"){
-      console.log("success");
-      location.reload();
-    }else{
-      // Toast for Inv. Format
-    }
-  });
-});
-
-$("#compSubmit").click(function (){
-  $.ajax({
-    method: "POST",
-    url: "/api/student/add/competition",
-    data: {
-      description: [{
-        title: $("#comp").val(),
-        description: $("#descriptionComp").val(),
-        date: {
-          date: $("#dateComp").val(),
-          month: $("#monthComp").val(),
-          year: $("#yearComp").val()
-        }
-      }]
     }
   })
   .done(function(msg){

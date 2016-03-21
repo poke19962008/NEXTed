@@ -194,7 +194,7 @@ router.get('/createDummyUser', function (req, res){
          month: 12,
          year: 1996
        },
-       address: "Qno. 69/Type IV/ Sector VA, BHEL Society",
+       address: "Qno. XX/Type XX/ Sector XX, XXX Company",
        email: "poke19962008@gmail.com",
        blog: "sayandas.xyz",
        phone: "9176046XXX"
@@ -218,7 +218,7 @@ router.get('/createDummyUser', function (req, res){
      }],
      competition: [{
        title: "ACM ICPC",
-       description: "Provincial competitive programming contest.",
+       description: "The Hindustan University, Chennai conducted ACM ICPC Multi Provincial (National level) contest for the second time after 2013 on 28th Februrary 2015. In which our team ranked 6th position out of 140 teams, ranked 1st position within SRM University.Over 250+ teams applied for the event, out of which 171 were accepted. 140+ teams made it to the event making it the second largest ICPC contest conducted in India.",
        date: {
          date: 14,
          month: 12,
@@ -226,8 +226,8 @@ router.get('/createDummyUser', function (req, res){
        }
      }],
      award: [{
-         title: "Table Tennis Gold",
-         description: "Inter School Table Tennis competition",
+         title: "Professional-Iconic Event of The Year ",
+         description: "SudoCrawler(2015) won the IET South Regional Iconic Event of The Year (2015) from SRM University. Awarded to an IET prestigious event of a student chapter for its commendable contribution towards the growth of IET.",
          date: {
              date: 12,
              month: 12,
