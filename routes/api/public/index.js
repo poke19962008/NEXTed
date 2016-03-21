@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var getProfileRouter = require('./getprofile');
+var getProfileRouter = require('./getProfile');
 
 var Teacher = require('../teacher/model').teacher;
 

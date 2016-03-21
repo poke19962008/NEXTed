@@ -56,7 +56,7 @@ app.use("/profile", getProfile);
 app.use("/api", api);
 
 
-app.listen(process.env.PORT || 3000, process.env.IP || "0.0.0.0", function(){
+app.listen(process.env.PORT || 80, process.env.IP || "0.0.0.0", function(){
   var addr = process.env.IP || "0.0.0.0";
   var port = process.env.PORT || 3000;
   var preprocess = require('./preprocess');
