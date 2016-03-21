@@ -59,3 +59,6 @@ $ npm install && npm start
   - Atom
   - Sublime
   - Visual Studio
+
+
+Crafted <3 with by Nexted Team.
