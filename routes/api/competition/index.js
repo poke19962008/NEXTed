@@ -15,7 +15,7 @@ router.get('/', function(req, res){
   res.send("hello");
 });
 
-
+// Add Dummy Competition
 router.get('/addDummyComp', function(req, res){
  var comp = new Competition({
    name: "Behes",
