@@ -65,6 +65,9 @@
              ID: ID
            }
          }).done(function(msg){
+           // Remove Loading Text Placeholder
+           $(".animated-background").remove();
+
            var name = encName(msg.name);
 
            var dob = date2str(msg.detail.personalInfo.dateOfBirth);
