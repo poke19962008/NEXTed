@@ -61,4 +61,4 @@ $ npm install && npm start
   - Visual Studio
 
 
-Crafted <3 with by Nexted Team.
+**Crafted <3 with by Nexted Team**
