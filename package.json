@@ -4,6 +4,9 @@
   "description": "Start up project to improve educational system",
   "main": "server.js",
   "repository": "https://github.com/poke19962008/EduFix.git",
+  "scripts":{
+    "test": "node server.js"
+  },
   "author": "Sayan Das <poke19962008@gmail.com>",
   "dependencies": {
     "body-parser": "^1.15.0",
