@@ -1,4 +1,4 @@
-# NEXTed (Imagine Cup 2016)
+# NEXTed (Imagine Cup 2016) [![Build Status](https://travis-ci.org/poke19962008/NEXTed.svg?branch=master)](https://travis-ci.org/poke19962008/NEXTed)
 
 We believe in fixing the education system and improving the way how things work in a regular schooling system. This is what everybody has observed but no effective initiative has been taken yet. We have build a peer to peer learning and encouraging platform for students as well as teachers.
 
