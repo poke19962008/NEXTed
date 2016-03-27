@@ -18,17 +18,19 @@ router.get('/', function(req, res){
 ** Success: bio designation personalInfo skills competition award name studentID
 ** Failed
 **/
-router.get('/student', function (req, res){
+router.get('/student', function (req, res, next){
+  res.status(500).send("text"); throw true;
   var id;
-  try{
-    if(req.query.ID != undefined)
-      id = req.query.ID;
-    else throw true;
 
-    Student.findOne({
-      studentID: id
-    }, "name", function(err, doc){
-      if((err) || (doc == null)) throw true;
+  if(req.query.ID != undefined)
+    id = req.query.ID;
+  else throw true;
+
+  Student.findOne({
+    studentID: id
+  }, "name", function(err, doc){
+    if((err) || (doc == null)) {res.status(404).send("Inv. parameter");}
+    else{
       var name = doc.name;
 
       StudentDetail.findOne({
@@ -39,10 +41,9 @@ router.get('/student', function (req, res){
         doc.name = name;
         res.send({name: name, detail: doc});
       });
-    });
-  }catch(e){
-    res.send({status: 'inv. parmater.'})
-  }
+    }
+  });
+
 });
 
 /**
@@ -54,7 +55,6 @@ router.get('/student', function (req, res){
 **/
 router.get('/teacher', function (req, res){
   var id;
-  try{
     if(req.query.ID != undefined)
       id = req.query.ID;
     else throw true;
@@ -62,22 +62,22 @@ router.get('/teacher', function (req, res){
     Teacher.findOne({
       teacherID: id
     }, "name", function(err, doc){
-      if((err) || (doc == null)) throw true;
-      var name = doc.name;
+      if((err) || (doc == null)) {res.status(404).send("Inv. parameter");}
+      else{
+        var name = doc.name;
 
-      TeacherDetail.findOne({
-        teacherID: id
-      },
-      "teacherID bio designation personalInfo experience qualification award skills", function(err, doc){
+        TeacherDetail.findOne({
+          teacherID: id
+        },
+        "teacherID bio designation personalInfo experience qualification award skills", function(err, doc){
 
-        if(err || doc == undefined) throw true;
-        doc.name = name;
-        res.send({name: name, detail: doc});
-      });
+          if(err || doc == undefined) throw true;
+          doc.name = name;
+          res.send({name: name, detail: doc});
+        });
+      }
     });
-  }catch(e){
-    res.send({status: 'inv. parmater.'})
-  }
+
 });
 
 module.exports = router;
