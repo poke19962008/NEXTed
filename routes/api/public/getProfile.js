@@ -19,7 +19,6 @@ router.get('/', function(req, res){
 ** Failed
 **/
 router.get('/student', function (req, res, next){
-  res.status(500).send("text"); throw true;
   var id;
 
   if(req.query.ID != undefined)
