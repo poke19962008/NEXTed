@@ -1,0 +1,29 @@
+body {
+    background: #eceff1;    
+}
+nav .nav-wrapper{
+
+margin-left: 10% !important;
+margin-right: 10% !important;
+}
+nav {
+	background-color: #47a3da;
+}
+#outerdiv {
+	margin-left: 10% !important;
+	margin-right: 10% !important;	
+}
+.card-title{
+
+}
+footer.page-footer {
+	padding: 10px;
+   padding-top: 20px;
+    background-color: #47a3da;
+}
+.newhead{
+	font-size: -0.08rem !important;
+}
+h3{
+	font-size: 20px !important;
+}
