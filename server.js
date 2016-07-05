@@ -55,4 +55,6 @@ app.use(session({        // Session configs
 app.use("/profile", getProfile);
 app.use("/api", api);
 
+app.listen(3000);
+
 module.exports = app;
